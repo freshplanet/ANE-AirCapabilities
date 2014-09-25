@@ -1,0 +1,252 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5A7B108D162F80630057D83F /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7B108C162F80630057D83F /* Twitter.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		5AF18040157EC4C80043C2CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF1803F157EC4C80043C2CF /* Foundation.framework */; };
+		5AF18046157EC4C80043C2CF /* AirCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF18045157EC4C80043C2CF /* AirCapabilities.m */; };
+		5AF18055157EC61C0043C2CF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF18054157EC61C0043C2CF /* UIKit.framework */; };
+		5AF1805D157EC90F0043C2CF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF1805C157EC90F0043C2CF /* MessageUI.framework */; };
+		FA70AA3C1743D3C200DD2457 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = FA70AA3B1743D3C200DD2457 /* FlashRuntimeExtensions.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5A7B108C162F80630057D83F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		5AF1803C157EC4C80043C2CF /* libAirCapabilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirCapabilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AF1803F157EC4C80043C2CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5AF18043157EC4C80043C2CF /* AirCapabilities-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirCapabilities-Prefix.pch"; sourceTree = "<group>"; };
+		5AF18044157EC4C80043C2CF /* AirCapabilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirCapabilities.h; sourceTree = "<group>"; };
+		5AF18045157EC4C80043C2CF /* AirCapabilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirCapabilities.m; sourceTree = "<group>"; };
+		5AF18054157EC61C0043C2CF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5AF1805C157EC90F0043C2CF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		FA70AA3B1743D3C200DD2457 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5AF18039157EC4C80043C2CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AF1805D157EC90F0043C2CF /* MessageUI.framework in Frameworks */,
+				5AF18055157EC61C0043C2CF /* UIKit.framework in Frameworks */,
+				5AF18040157EC4C80043C2CF /* Foundation.framework in Frameworks */,
+				5A7B108D162F80630057D83F /* Twitter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5AF18031157EC4C80043C2CF = {
+			isa = PBXGroup;
+			children = (
+				5AF18041157EC4C80043C2CF /* AirCapabilities */,
+				5AF1803E157EC4C80043C2CF /* Frameworks */,
+				5AF1803D157EC4C80043C2CF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5AF1803D157EC4C80043C2CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5AF1803C157EC4C80043C2CF /* libAirCapabilities.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5AF1803E157EC4C80043C2CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A7B108C162F80630057D83F /* Twitter.framework */,
+				5AF1805C157EC90F0043C2CF /* MessageUI.framework */,
+				5AF18054157EC61C0043C2CF /* UIKit.framework */,
+				5AF1803F157EC4C80043C2CF /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5AF18041157EC4C80043C2CF /* AirCapabilities */ = {
+			isa = PBXGroup;
+			children = (
+				5AF18044157EC4C80043C2CF /* AirCapabilities.h */,
+				5AF18045157EC4C80043C2CF /* AirCapabilities.m */,
+				5AF18042157EC4C80043C2CF /* Supporting Files */,
+			);
+			path = AirCapabilities;
+			sourceTree = "<group>";
+		};
+		5AF18042157EC4C80043C2CF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA70AA3B1743D3C200DD2457 /* FlashRuntimeExtensions.h */,
+				5AF18043157EC4C80043C2CF /* AirCapabilities-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5AF1803A157EC4C80043C2CF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA70AA3C1743D3C200DD2457 /* FlashRuntimeExtensions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5AF1803B157EC4C80043C2CF /* AirCapabilities */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5AF18049157EC4C80043C2CF /* Build configuration list for PBXNativeTarget "AirCapabilities" */;
+			buildPhases = (
+				5AF18038157EC4C80043C2CF /* Sources */,
+				5AF18039157EC4C80043C2CF /* Frameworks */,
+				5AF1803A157EC4C80043C2CF /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirCapabilities;
+			productName = AirCapabilities;
+			productReference = 5AF1803C157EC4C80043C2CF /* libAirCapabilities.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5AF18033157EC4C80043C2CF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
+			buildConfigurationList = 5AF18036157EC4C80043C2CF /* Build configuration list for PBXProject "AirCapabilities" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5AF18031157EC4C80043C2CF;
+			productRefGroup = 5AF1803D157EC4C80043C2CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5AF1803B157EC4C80043C2CF /* AirCapabilities */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5AF18038157EC4C80043C2CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AF18046157EC4C80043C2CF /* AirCapabilities.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5AF18047157EC4C80043C2CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5AF18048157EC4C80043C2CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5AF1804A157EC4C80043C2CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/AirCapabilities.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirCapabilities/AirCapabilities-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = ../;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5AF1804B157EC4C80043C2CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/AirCapabilities.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirCapabilities/AirCapabilities-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = ../;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5AF18036157EC4C80043C2CF /* Build configuration list for PBXProject "AirCapabilities" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AF18047157EC4C80043C2CF /* Debug */,
+				5AF18048157EC4C80043C2CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5AF18049157EC4C80043C2CF /* Build configuration list for PBXNativeTarget "AirCapabilities" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AF1804A157EC4C80043C2CF /* Debug */,
+				5AF1804B157EC4C80043C2CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5AF18033157EC4C80043C2CF /* Project object */;
+}
