@@ -129,6 +129,14 @@ package com.freshplanet.nativeExtensions
 			}
 			return "";
 		}
+		public function getMachineName():String
+		{
+			if (this.useNativeExtension())
+			{
+				return extContext.call("getMachineName") as String;
+			}
+			return "";
+		}
 		
 		public function processReferralLink(url:String):void
 		{

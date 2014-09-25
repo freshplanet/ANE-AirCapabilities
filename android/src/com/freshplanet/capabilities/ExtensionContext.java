@@ -62,6 +62,7 @@ public class ExtensionContext extends FREContext {
 		functionMap.put("sendWithTwitter", new SendWithTwitterFunction());
 		functionMap.put("redirectToRating", new RedirectToRatingFunction());
 		functionMap.put("getDeviceModel", new GetDeviceModel());
+		functionMap.put("getMachineName", new GetDeviceModel()); // in android these are the same
 		functionMap.put("processReferralLink", new ProcessReferralLinkFunction());
 		functionMap.put("redirectToPageId", new RedirectToPageIdFunction());
 		functionMap.put("redirectToTwitterAccount", new RedirectToTwitterAccount());
