@@ -7,6 +7,8 @@
 //
 
 #import "AirCapabilities.h"
+#import <sys/utsname.h>
+
 #define DEFINE_ANE_FUNCTION(fn) FREObject (fn)(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
 
 
@@ -282,6 +284,15 @@ DEFINE_ANE_FUNCTION(getDeviceModel)
 	FRENewObjectFromUTF8(strlen(str)+1, (const uint8_t*)str, &retStr);
 
     return retStr;
+}
+
+DEFINE_ANE_FUNCTION(getMachineName) {
+	struct utsname systemInfo;
+	uname(&systemInfo);
+	const char *str = systemInfo.machine;
+	FREObject retStr;
+	FRENewObjectFromUTF8(strlen(str)+1, (const uint8_t*)str, &retStr);
+	return retStr;
 }
 
 DEFINE_ANE_FUNCTION(processReferralLink)
@@ -625,7 +636,7 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
                                   uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {    
     // Register the links btwn AS3 and ObjC. (dont forget to modify the nbFuntionsToLink integer if you are adding/removing functions)
-    NSInteger nbFuntionsToLink = 17;
+    NSInteger nbFuntionsToLink = 18;
     *numFunctionsToTest = nbFuntionsToLink;
     
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
@@ -652,52 +663,54 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
     func[5].name = (const uint8_t*) "getDeviceModel";
     func[5].functionData = NULL;
     func[5].function = &getDeviceModel;
-
-    func[6].name = (const uint8_t*) "processReferralLink";
+	
+	func[6].name = (const uint8_t*) "getMachineName";
     func[6].functionData = NULL;
-    func[6].function = &processReferralLink;
+    func[6].function = &getMachineName;
 
-    func[7].name = (const uint8_t*) "redirectToPageId";
+    func[7].name = (const uint8_t*) "processReferralLink";
     func[7].functionData = NULL;
-    func[7].function = &redirectToPageId;
-    
-    
-    func[8].name = (const uint8_t*) "redirectToTwitterAccount";
+    func[7].function = &processReferralLink;
+	
+    func[8].name = (const uint8_t*) "redirectToPageId";
     func[8].functionData = NULL;
-    func[8].function = &redirectToTwitterAccount;
-
+    func[8].function = &redirectToPageId;
     
-    func[9].name = (const uint8_t*) "canPostPictureOnTwitter";
+    func[9].name = (const uint8_t*) "redirectToTwitterAccount";
     func[9].functionData = NULL;
-    func[9].function = &canPostPictureOnTwitter;
+    func[9].function = &redirectToTwitterAccount;
 
-    func[10].name = (const uint8_t*) "postPictureOnTwitter";
+    func[10].name = (const uint8_t*) "canPostPictureOnTwitter";
     func[10].functionData = NULL;
-    func[10].function = &postPictureOnTwitter;
-    
-    func[11].name = (const uint8_t*) "openExternalApplication";
-    func[11].functionData = NULL;
-    func[11].function = &openExternalApplication;
+    func[10].function = &canPostPictureOnTwitter;
 
-    func[12].name = (const uint8_t*) "getOSVersion";
+    func[11].name = (const uint8_t*) "postPictureOnTwitter";
+    func[11].functionData = NULL;
+    func[11].function = &postPictureOnTwitter;
+    
+    func[12].name = (const uint8_t*) "openExternalApplication";
     func[12].functionData = NULL;
-    func[12].function = &getOSVersion;
-    
-    func[13].name = (const uint8_t*) "canOpenURL";
+    func[12].function = &openExternalApplication;
+
+    func[13].name = (const uint8_t*) "getOSVersion";
     func[13].functionData = NULL;
-    func[13].function = &AirCapabilitiesCanOpenURL;
+    func[13].function = &getOSVersion;
     
-    func[14].name = (const uint8_t*) "openURL";
+    func[14].name = (const uint8_t*) "canOpenURL";
     func[14].functionData = NULL;
-    func[14].function = &AirCapabilitiesOpenURL;
+    func[14].function = &AirCapabilitiesCanOpenURL;
     
-    func[15].name = (const uint8_t*) "setLogging";
+    func[15].name = (const uint8_t*) "openURL";
     func[15].functionData = NULL;
-    func[15].function = &AirCapabilitiesSetLogging;
+    func[15].function = &AirCapabilitiesOpenURL;
     
-    func[16].name = (const uint8_t*) "traceLog";
+    func[16].name = (const uint8_t*) "setLogging";
     func[16].functionData = NULL;
-    func[16].function = &traceLog;
+    func[16].function = &AirCapabilitiesSetLogging;
+    
+    func[17].name = (const uint8_t*) "traceLog";
+    func[17].functionData = NULL;
+    func[17].function = &traceLog;
     
     *functionsToSet = func;
     

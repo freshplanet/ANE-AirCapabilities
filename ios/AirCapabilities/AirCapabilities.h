@@ -32,6 +32,7 @@ FREObject sendSms(FREContext context, void* functionData, uint32_t argc, FREObje
 FREObject sendWithTwitter(FREContext context, void* functionData, uint32_t argc, FREObject argv[]);
 FREObject redirectToRating(FREContext context, void* functionData, uint32_t argc, FREObject argv[]);
 FREObject getDeviceModel(FREContext context, void* functionData, uint32_t argc, FREObject argv[]);
+FREObject getMachineName(FREContext context, void* functionData, uint32_t argc, FREObject argv[]);
 FREObject processReferralLink(FREContext context, void* functionData, uint32_t argc, FREObject argv[]);
 FREObject redirectToPageId(FREContext context, void* functionData, uint32_t argc, FREObject argv[]);
 FREObject redirectToTwitterAccount(FREContext context, void* functionData, uint32_t argc, FREObject argv[]);
