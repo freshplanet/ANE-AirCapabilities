@@ -11,8 +11,9 @@
 #import "FlashRuntimeExtensions.h"
 #import <MessageUI/MFMessageComposeViewController.h>
 #import <Twitter/TWTweetComposeViewController.h>
+#import <StoreKit/StoreKit.h>
 
-@interface AirCapabilities : NSObject<MFMessageComposeViewControllerDelegate>
+@interface AirCapabilities : NSObject<MFMessageComposeViewControllerDelegate, SKStoreProductViewControllerDelegate>
 {
     NSURL* iTunesURL;
 }
@@ -44,6 +45,7 @@ FREObject AirCapabilitiesCanOpenURL(FREContext context, void* functionData, uint
 FREObject AirCapabilitiesOpenURL(FREContext context, void* functionData, uint32_t argc, FREObject argv[]);
 FREObject AirCapabilitiesSetLogging(FREContext context, void* functionData, uint32_t argc, FREObject argv[]);
 FREObject traceLog(FREContext, void* functionData, uint32_t argc, FREObject argv[]);
+FREObject AirCapabilitiesOpenModalAppStore(FREContext, void* functionData, uint32_t argc, FREObject argv[]);
 
 
 

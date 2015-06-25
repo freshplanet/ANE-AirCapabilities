@@ -205,6 +205,16 @@ package com.freshplanet.nativeExtensions
 			if (useNativeExtension())
 				extContext.call("openURL", url);
 		}
+
+		/**
+		 *
+		 * @param appStoreId	id of the app to open a modal view to (do not include the "id" at the beginning of the number)
+		 */
+		public function openModalAppStoreIOS(appStoreId:String):void
+		{
+			if (Capabilities.manufacturer.indexOf("iOS") > -1)
+				extContext.call("openModalAppStore", appStoreId);
+		}
 		
 		public function getOSVersion():String
 		{
