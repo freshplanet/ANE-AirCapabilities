@@ -71,6 +71,10 @@ package com.freshplanet.nativeExtensions
 				var openEvent:OpenURLEvent = new OpenURLEvent(OpenURLEvent.OPEN_URL_SUCCESS, event.level);
 				this.dispatchEvent(openEvent);
 			}
+			else if (event.code == "CLOSED_MODAL_APP_STORE")
+			{
+
+			}
 		}
 		
 		public static function get instance():AirCapabilities {
@@ -235,8 +239,6 @@ package com.freshplanet.nativeExtensions
 		{
 			return Capabilities.manufacturer.indexOf("iOS") > -1 || Capabilities.manufacturer.indexOf("Android") > -1;
 		}
-
-		
 	}
 }
 

@@ -99,6 +99,32 @@ bool doLogging = false;
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
 {
     [[UIApplication sharedApplication].delegate.window.rootViewController dismissModalViewControllerAnimated:YES];
+    
+    if (myAirCapaCtx)
+        FREDispatchStatusEventAsync(myAirCapaCtx, (const uint8_t*)"CLOSED_MODAL_APP_STORE", (const uint8_t*)"");
+}
+
+- (void) openModalAppStore:(NSString*)appStoreID {
+    
+    if (!NSClassFromString(@"SKStoreProductViewController")) // if feature is not available
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]]];
+    else
+    {
+        SKStoreProductViewController* storeController = [[SKStoreProductViewController alloc] init];
+        storeController.delegate = self;
+        
+        [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:storeController animated:YES completion:nil];
+        
+        [storeController loadProductWithParameters:@{ SKStoreProductParameterITunesItemIdentifier: appStoreID }
+                                   completionBlock:^(BOOL result, NSError *error) {
+                                       
+                                       if (!result) {
+                                           
+                                           [[UIApplication sharedApplication].delegate.window.rootViewController dismissModalViewControllerAnimated:YES];
+                                           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]]];
+                                       }
+                                   }];
+    }
 }
 
 @end
@@ -642,23 +668,7 @@ DEFINE_ANE_FUNCTION(AirCapabilitiesOpenModalAppStore)
     if (FREGetObjectAsUTF8(argv[0], &stringLength, &appStoreIdString) == FRE_OK)
         appStoreID = [NSString stringWithUTF8String:(const char *)appStoreIdString];
     
-    if (!NSClassFromString(@"SKStoreProductViewController")) // if feature is not available
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]]];
-    else
-    {
-        SKStoreProductViewController *storeController = [[SKStoreProductViewController alloc] init];
-        storeController.delegate = [AirCapabilities sharedInstance];
-        
-        [storeController loadProductWithParameters:@{ SKStoreProductParameterITunesItemIdentifier: appStoreID }
-                                   completionBlock:^(BOOL result, NSError *error) {
-                                       if (result) {
-                                           [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:storeController animated:YES completion:nil];
-                                       } else {
-                                           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]]];
-                                       }
-                                   }];
-        
-    }
+    [[AirCapabilities sharedInstance] openModalAppStore:appStoreID];
     
     return nil;
 }
