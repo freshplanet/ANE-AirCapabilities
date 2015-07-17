@@ -96,6 +96,36 @@ bool doLogging = false;
     }
 }
 
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
+{
+    [[UIApplication sharedApplication].delegate.window.rootViewController dismissModalViewControllerAnimated:YES];
+    
+    if (myAirCapaCtx)
+        FREDispatchStatusEventAsync(myAirCapaCtx, (const uint8_t*)"CLOSED_MODAL_APP_STORE", (const uint8_t*)"");
+}
+
+- (void) openModalAppStore:(NSString*)appStoreID {
+    
+    if (!NSClassFromString(@"SKStoreProductViewController")) // if feature is not available
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]]];
+    else
+    {
+        SKStoreProductViewController* storeController = [[SKStoreProductViewController alloc] init];
+        storeController.delegate = self;
+        
+        [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:storeController animated:YES completion:nil];
+        
+        [storeController loadProductWithParameters:@{ SKStoreProductParameterITunesItemIdentifier: appStoreID }
+                                   completionBlock:^(BOOL result, NSError *error) {
+                                       
+                                       if (!result) {
+                                           
+                                           [[UIApplication sharedApplication].delegate.window.rootViewController dismissModalViewControllerAnimated:YES];
+                                           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]]];
+                                       }
+                                   }];
+    }
+}
 
 @end
 
@@ -628,6 +658,20 @@ DEFINE_ANE_FUNCTION(traceLog)
     return nil;
 }
 
+DEFINE_ANE_FUNCTION(AirCapabilitiesOpenModalAppStore)
+{
+    uint32_t stringLength;
+    
+    const uint8_t *appStoreIdString;
+    NSString* appStoreID;
+    
+    if (FREGetObjectAsUTF8(argv[0], &stringLength, &appStoreIdString) == FRE_OK)
+        appStoreID = [NSString stringWithUTF8String:(const char *)appStoreIdString];
+    
+    [[AirCapabilities sharedInstance] openModalAppStore:appStoreID];
+    
+    return nil;
+}
 
 // AirBgMusicContextInitializer()
 //
@@ -636,7 +680,7 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
                                   uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {    
     // Register the links btwn AS3 and ObjC. (dont forget to modify the nbFuntionsToLink integer if you are adding/removing functions)
-    NSInteger nbFuntionsToLink = 18;
+    NSInteger nbFuntionsToLink = 19;
     *numFunctionsToTest = nbFuntionsToLink;
     
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
@@ -711,6 +755,10 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
     func[17].name = (const uint8_t*) "traceLog";
     func[17].functionData = NULL;
     func[17].function = &traceLog;
+    
+    func[18].name = (const uint8_t*) "openModalAppStore";
+    func[18].functionData = NULL;
+    func[18].function = &AirCapabilitiesOpenModalAppStore;
     
     *functionsToSet = func;
     

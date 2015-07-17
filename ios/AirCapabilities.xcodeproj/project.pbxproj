@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16E1302C1B3C8E830054DE5F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E1302B1B3C8E830054DE5F /* StoreKit.framework */; };
 		5A7B108D162F80630057D83F /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7B108C162F80630057D83F /* Twitter.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5AF18040157EC4C80043C2CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF1803F157EC4C80043C2CF /* Foundation.framework */; };
 		5AF18046157EC4C80043C2CF /* AirCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF18045157EC4C80043C2CF /* AirCapabilities.m */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16E1302B1B3C8E830054DE5F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5A7B108C162F80630057D83F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		5AF1803C157EC4C80043C2CF /* libAirCapabilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirCapabilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF1803F157EC4C80043C2CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -32,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16E1302C1B3C8E830054DE5F /* StoreKit.framework in Frameworks */,
 				5AF1805D157EC90F0043C2CF /* MessageUI.framework in Frameworks */,
 				5AF18055157EC61C0043C2CF /* UIKit.framework in Frameworks */,
 				5AF18040157EC4C80043C2CF /* Foundation.framework in Frameworks */,
@@ -62,6 +65,7 @@
 		5AF1803E157EC4C80043C2CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				16E1302B1B3C8E830054DE5F /* StoreKit.framework */,
 				5A7B108C162F80630057D83F /* Twitter.framework */,
 				5AF1805C157EC90F0043C2CF /* MessageUI.framework */,
 				5AF18054157EC61C0043C2CF /* UIKit.framework */,

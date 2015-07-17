@@ -71,6 +71,10 @@ package com.freshplanet.nativeExtensions
 				var openEvent:OpenURLEvent = new OpenURLEvent(OpenURLEvent.OPEN_URL_SUCCESS, event.level);
 				this.dispatchEvent(openEvent);
 			}
+			else if (event.code == "CLOSED_MODAL_APP_STORE")
+			{
+
+			}
 		}
 		
 		public static function get instance():AirCapabilities {
@@ -205,6 +209,16 @@ package com.freshplanet.nativeExtensions
 			if (useNativeExtension())
 				extContext.call("openURL", url);
 		}
+
+		/**
+		 *
+		 * @param appStoreId	id of the app to open a modal view to (do not include the "id" at the beginning of the number)
+		 */
+		public function openModalAppStoreIOS(appStoreId:String):void
+		{
+			if (Capabilities.manufacturer.indexOf("iOS") > -1)
+				extContext.call("openModalAppStore", appStoreId);
+		}
 		
 		public function getOSVersion():String
 		{
@@ -225,8 +239,6 @@ package com.freshplanet.nativeExtensions
 		{
 			return Capabilities.manufacturer.indexOf("iOS") > -1 || Capabilities.manufacturer.indexOf("Android") > -1;
 		}
-
-		
 	}
 }
 
