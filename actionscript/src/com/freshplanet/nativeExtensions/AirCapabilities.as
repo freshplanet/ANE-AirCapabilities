@@ -185,6 +185,23 @@ package com.freshplanet.nativeExtensions
 			}
 		}
 		
+		public function hasInstagramEnabled():Boolean
+		{
+			if (this.useNativeExtension())
+			{
+				return extContext.call("hasInstagramEnabled");
+			}
+			return false;
+		}
+		
+		public function postPictureOnInstagram(message:String, bitmapData:BitmapData, x:int, y:int, width:int, height:int):void
+		{
+			if (this.useNativeExtension())
+			{
+				extContext.call("postPictureOnInstagram", message, bitmapData, x, y, width, height);
+			}
+		}
+		
 		/**
 		 * Open an application (if installed on the Device) or send the player to the appstore.  iOS Only 
 		 * 

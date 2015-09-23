@@ -73,6 +73,8 @@ public class ExtensionContext extends FREContext {
 		functionMap.put("getOSVersion", new GetOSVersionFunction());
 		functionMap.put("setLogging", new SetLogging());
 		functionMap.put("traceLog", new LogFunction());
+		functionMap.put("hasInstagram", new HasInstagramFunction());
+		functionMap.put("postPictureOnInstagram", new PostPictureOnInstagramFunction());
 		return functionMap;	
 	}
 

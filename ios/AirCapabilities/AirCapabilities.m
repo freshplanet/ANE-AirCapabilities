@@ -15,9 +15,10 @@
 FREContext myAirCapaCtx = nil;
 bool doLogging = false;
 
+
 @implementation AirCapabilities
 
-@synthesize iTunesURL;
+@synthesize iTunesURL, interactionController;
 
 +(id) sharedInstance {
     static id sharedInstance = nil;
@@ -27,6 +28,8 @@ bool doLogging = false;
     
     return sharedInstance;
 }
+
+
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
@@ -673,6 +676,122 @@ DEFINE_ANE_FUNCTION(AirCapabilitiesOpenModalAppStore)
     return nil;
 }
 
+DEFINE_ANE_FUNCTION(hasInstagramEnabled)
+{
+    BOOL value = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"instagram://app"]];
+    FREObject retBool = nil;
+    FRENewObjectFromBool(value, &retBool);
+    return retBool;
+}
+
+DEFINE_ANE_FUNCTION(postPictureOnInstagram)
+{
+    
+    uint32_t string_length;
+    const uint8_t *utf8_message;
+    
+    NSString* message;
+    if (FREGetObjectAsUTF8(argv[0], &string_length, &utf8_message) == FRE_OK)
+    {
+        message = [NSString stringWithUTF8String:(char*) utf8_message];
+    }
+    
+    FREBitmapData bitmapData;
+    UIImage *rewardImage;
+    if (FREAcquireBitmapData(argv[1], &bitmapData) == FRE_OK)
+    {
+        
+        // make data provider from buffer
+        CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, bitmapData.bits32, (bitmapData.width * bitmapData.height * 4), NULL);
+        
+        // set up for CGImage creation
+        int                     bitsPerComponent    = 8;
+        int                     bitsPerPixel        = 32;
+        int                     bytesPerRow         = 4 * bitmapData.width;
+        CGColorSpaceRef         colorSpaceRef       = CGColorSpaceCreateDeviceRGB();
+        CGBitmapInfo            bitmapInfo;
+        
+        if( bitmapData.hasAlpha )
+        {
+            if( bitmapData.isPremultiplied )
+                bitmapInfo = kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst;
+            else
+                bitmapInfo = kCGBitmapByteOrder32Little | kCGImageAlphaFirst;
+        }
+        else
+        {
+            bitmapInfo = kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipFirst;
+        }
+        
+        CGColorRenderingIntent  renderingIntent     = kCGRenderingIntentDefault;
+        CGImageRef              imageRef            = CGImageCreate(bitmapData.width, bitmapData.height, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpaceRef, bitmapInfo, provider, NULL, NO, renderingIntent);
+        
+        // make UIImage from CGImage
+        rewardImage = [UIImage imageWithCGImage:imageRef];
+        
+        FREReleaseBitmapData( argv[1] );
+    }
+    
+    
+    int32_t xPosition;
+    if(FREGetObjectAsInt32(argv[2], &xPosition) != FRE_OK) {
+        NSLog(@"[AirCapabilities] Error trying to call traceLog from flash");
+        return nil;
+    }
+
+    int32_t yPosition;
+    if(FREGetObjectAsInt32(argv[3], &yPosition) != FRE_OK) {
+        NSLog(@"[AirCapabilities] Error trying to call traceLog from flash");
+        return nil;
+    }
+
+    int32_t width;
+    if(FREGetObjectAsInt32(argv[4], &width) != FRE_OK) {
+        NSLog(@"[AirCapabilities] Error trying to call traceLog from flash");
+        return nil;
+    }
+
+    int32_t height;
+    if(FREGetObjectAsInt32(argv[5], &height) != FRE_OK) {
+        NSLog(@"[AirCapabilities] Error trying to call traceLog from flash");
+        return nil;
+    }
+
+    
+
+    // saving it to disk
+    NSData *imageData= UIImageJPEGRepresentation(rewardImage,0.0);
+    NSString *imagePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"/insta.igo"];
+    [imageData writeToFile:imagePath atomically:YES];
+
+    
+    // creating the popover
+    ((AirCapabilities*) [AirCapabilities sharedInstance]).interactionController =
+    [UIDocumentInteractionController interactionControllerWithURL: [NSURL fileURLWithPath:imagePath]];
+    
+    UIDocumentInteractionController *interactionController = ((AirCapabilities*) [AirCapabilities sharedInstance]).interactionController;
+    
+    // setting specific param
+    interactionController.UTI = @"com.instagram.exclusivegram";
+    if (message != nil)
+    {
+        interactionController.annotation = [NSDictionary dictionaryWithObject:message forKey:@"InstagramCaption"]; // todo pass message
+    }
+    
+    // Present the tweet composition view controller modally.
+    id delegate = [[UIApplication sharedApplication] delegate];
+    
+    interactionController.delegate = delegate;
+    
+    UIView *rootView = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
+
+    [interactionController presentOpenInMenuFromRect:CGRectMake(xPosition, yPosition, width, height) inView:rootView animated:YES];
+    
+    return nil;
+}
+
+
+
 // AirBgMusicContextInitializer()
 //
 // The context initializer is called when the runtime creates the extension context instance.
@@ -680,7 +799,8 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
                                   uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {    
     // Register the links btwn AS3 and ObjC. (dont forget to modify the nbFuntionsToLink integer if you are adding/removing functions)
-    NSInteger nbFuntionsToLink = 19;
+
+    NSInteger nbFuntionsToLink = 21;
     *numFunctionsToTest = nbFuntionsToLink;
     
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
@@ -759,6 +879,14 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
     func[18].name = (const uint8_t*) "openModalAppStore";
     func[18].functionData = NULL;
     func[18].function = &AirCapabilitiesOpenModalAppStore;
+
+    func[19].name = (const uint8_t*) "hasInstagramEnabled";
+    func[19].functionData = NULL;
+    func[19].function = &hasInstagramEnabled;
+
+    func[20].name = (const uint8_t*) "postPictureOnInstagram";
+    func[20].functionData = NULL;
+    func[20].function = &postPictureOnInstagram;
     
     *functionsToSet = func;
     

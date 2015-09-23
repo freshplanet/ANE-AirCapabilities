@@ -16,11 +16,13 @@
 @interface AirCapabilities : NSObject<MFMessageComposeViewControllerDelegate, SKStoreProductViewControllerDelegate>
 {
     NSURL* iTunesURL;
+    UIDocumentInteractionController *interactionController;
 }
 
 +(id) sharedInstance;
 
 @property (nonatomic, retain) NSURL* iTunesURL;
+@property (strong) UIDocumentInteractionController *interactionController;
 
 @end
 
@@ -46,6 +48,8 @@ FREObject AirCapabilitiesOpenURL(FREContext context, void* functionData, uint32_
 FREObject AirCapabilitiesSetLogging(FREContext context, void* functionData, uint32_t argc, FREObject argv[]);
 FREObject traceLog(FREContext, void* functionData, uint32_t argc, FREObject argv[]);
 FREObject AirCapabilitiesOpenModalAppStore(FREContext, void* functionData, uint32_t argc, FREObject argv[]);
+FREObject hasInstagramEnabled(FREContext, void* functionData, uint32_t argc, FREObject argv[]);
+FREObject postPictureOnInstagram(FREContext, void* functionData, uint32_t argc, FREObject argv[]);
 
 
 

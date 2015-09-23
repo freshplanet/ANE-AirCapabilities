@@ -21,13 +21,12 @@ import com.adobe.fre.FREObject;
 import com.adobe.fre.FRETypeMismatchException;
 import com.adobe.fre.FREWrongThreadException;
 
-public class PostPictureOnTwitterFunction implements FREFunction {
+public class PostPictureOnInstagramFunction implements FREFunction {
 
-	private static String TAG = "postTwitter";
+	private static String TAG = "postInstagram";
 	
 	@Override
 	public FREObject call(FREContext arg0, FREObject[] arg1) {
-
 		String message = null;
 		try {
 			message = arg1[0].getAsString();
@@ -164,7 +163,7 @@ public class PostPictureOnTwitterFunction implements FREFunction {
 		}
 		intent.setType("image/jpeg");
 
-		intent = HasTwitterFunction.getRightIntent(arg0.getActivity(), intent);
+		intent = HasInstagramFunction.getRightIntent(arg0.getActivity(), intent);
 		
 		
 		String absolute = arg0.getActivity().getFilesDir().getAbsolutePath()+"/"+filename;
@@ -187,8 +186,6 @@ public class PostPictureOnTwitterFunction implements FREFunction {
 		return null;
 	}
 	
-	
-	
 	private ByteBuffer swapColors(ByteBuffer value)
 	{
 		ByteBuffer returnedValue = ByteBuffer.allocate(value.capacity());
@@ -206,8 +203,6 @@ public class PostPictureOnTwitterFunction implements FREFunction {
 			returnedValue.put(i+3, a);
 
 		}
-		
-		
 		return returnedValue;
 	}
 

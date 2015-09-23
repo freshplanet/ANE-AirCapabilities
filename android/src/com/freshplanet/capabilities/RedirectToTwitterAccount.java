@@ -1,10 +1,6 @@
 package com.freshplanet.capabilities;
 
-import java.util.List;
-
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 
 import com.adobe.fre.FREContext;
@@ -34,14 +30,20 @@ public class RedirectToTwitterAccount implements FREFunction {
 			e.printStackTrace();
 		}
 
+		Intent intent = null;
+		
+		
 		if (twitterAccount != null)
 		{
-			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name="+twitterAccount));
-			final PackageManager packageManager = arg0.getActivity().getPackageManager();
-			List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-			if(list.size() == 0) {
-				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/"+twitterAccount));
+			try {
+				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name="+twitterAccount));
+			}catch (Exception e) {
+					intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/"+twitterAccount));
 			}
+		}
+		
+		if (intent != null)
+		{
 			arg0.getActivity().startActivity(intent);
 		}
 		return null;
