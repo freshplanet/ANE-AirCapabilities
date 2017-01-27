@@ -17,7 +17,7 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 
-package com.freshplanet.capabilities;
+package com.freshplanet.ane.AirCapabilities;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -16,31 +16,26 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.nativeExtensions
-{
+package com.freshplanet.ane.AirCapabilities {
+
 	import flash.events.Event;
 	
-	public class OpenURLEvent extends Event
-	{
-		
-		public static const OPEN_URL_SUCCESS:String = "OpenUrlSuccess";
-		
-		
-		public static const TO_APP_STORE:String = "STORE";
-		public static const TO_APP:String = "APP";
+	public class OpenURLEvent extends Event {
+
+		static public const OPEN_URL_SUCCESS:String = "OpenUrlSuccess";
+		static public const TO_APP_STORE:String = "STORE";
+		static public const TO_APP:String = "APP";
 		
 		private var _openType:String;
 		
-		public function OpenURLEvent(type:String, openType:String, bubbles:Boolean=false, cancelable:Boolean=false)
-		{
-			this._openType = openType;
+		public function OpenURLEvent(type:String, openType:String, bubbles:Boolean = false, cancelable:Boolean = false) {
+
+			_openType = openType;
 			super(type, bubbles, cancelable);
 		}
 		
-		public function get openType():String
-		{
+		public function get openType():String {
 			return this._openType;
 		}
-		
 	}
 }

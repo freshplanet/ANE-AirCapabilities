@@ -1,4 +1,4 @@
-package com.freshplanet.capabilities;
+package com.freshplanet.ane.AirCapabilities;
 
 import java.io.File;
 import java.io.FileNotFoundException;

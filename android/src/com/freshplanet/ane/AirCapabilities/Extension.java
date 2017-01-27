@@ -16,7 +16,7 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.capabilities;
+package com.freshplanet.ane.AirCapabilities;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREExtension;

@@ -1,4 +1,4 @@
-package com.freshplanet.nativeExtensions
+package com.freshplanet.ane.AirCapabilities
 {
 	import flash.external.ExtensionContext;
 

@@ -1,7 +1,6 @@
-package com.freshplanet.capabilities;
+package com.freshplanet.ane.AirCapabilities;
 
 import android.content.Intent;
-import android.net.Uri;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
@@ -10,14 +9,14 @@ import com.adobe.fre.FREObject;
 import com.adobe.fre.FRETypeMismatchException;
 import com.adobe.fre.FREWrongThreadException;
 
-public class RedirectToTwitterAccount implements FREFunction {
+public class SendWithTwitterFunction implements FREFunction {
 
 	@Override
 	public FREObject call(FREContext arg0, FREObject[] arg1) {
-		
-		String twitterAccount = null;
+
+		String message = null;
 		try {
-			twitterAccount = arg1[0].getAsString();
+			message = arg1[0].getAsString();
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (FRETypeMismatchException e) {
@@ -30,22 +29,20 @@ public class RedirectToTwitterAccount implements FREFunction {
 			e.printStackTrace();
 		}
 
-		Intent intent = null;
-		
-		
-		if (twitterAccount != null)
+
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		if (message != null)
 		{
-			try {
-				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name="+twitterAccount));
-			}catch (Exception e) {
-					intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/"+twitterAccount));
-			}
+			intent.putExtra(Intent.EXTRA_TEXT, message);
 		}
-		
+		intent.setType("text/plain");
+
+		intent = HasTwitterFunction.getRightIntent(arg0.getActivity(), intent);
 		if (intent != null)
 		{
 			arg0.getActivity().startActivity(intent);
 		}
+		
 		return null;
 	}
 

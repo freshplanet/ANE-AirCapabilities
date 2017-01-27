@@ -1,4 +1,4 @@
-package com.freshplanet.nativeExtensions
+package com.freshplanet.ane.AirCapabilities
 {
 	internal class DefaultLogger implements INativeLogger
 	{
