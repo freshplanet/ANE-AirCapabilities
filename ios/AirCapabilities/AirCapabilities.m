@@ -134,8 +134,7 @@ static double startingMem = 0;
 
 - (void) handleMemoryWarning:(NSNotification*)notification {
     
-    double percentUse = [AirCapabilities currentMemUse] / startingMem;
-    NSString* memUse = [NSString stringWithFormat:@"%f", percentUse];
+    NSString* memUse = [NSString stringWithFormat:@"%f", [AirCapabilities currentMemUse]];
     [self sendEvent:@"LOW_MEMORY_WARNING" level:memUse];
 }
 
