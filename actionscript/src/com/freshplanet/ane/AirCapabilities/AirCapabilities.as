@@ -319,6 +319,9 @@ package com.freshplanet.ane.AirCapabilities {
          */
         public function getCurrentVirtualMem():Number {
 
+            if (Capabilities.manufacturer.indexOf("Android") > -1)
+                return -1;
+
             var ret:Object = _extContext.call("getCurrentVirtualMem");
             if (ret is Error)
                 throw ret;

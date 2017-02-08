@@ -70,13 +70,6 @@ public class ExtensionContext extends FREContext {
         }
     };
 
-    private FREFunction getCurrentVirtualMem = new FREFunction() {
-        @Override
-        public FREObject call(FREContext ctx, FREObject[] args) {
-            return null;
-        }
-    };
-
 	/**
 	 * Registers AS function name to Java Function Class
 	 */
@@ -107,7 +100,6 @@ public class ExtensionContext extends FREContext {
 		functionMap.put("hasInstagram", new HasInstagramFunction());
         functionMap.put("postPictureOnInstagram", new PostPictureOnInstagramFunction());
         functionMap.put("getCurrentMem", getCurrentMem);
-        functionMap.put("getCurrentVirtualMem", getCurrentVirtualMem);
 		return functionMap;	
 	}
 
