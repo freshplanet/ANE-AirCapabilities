@@ -15,12 +15,6 @@
 
 @implementation AirCapabilities
 
-static double startingMem = 0;
-
-+ (void)load {
-    startingMem = [AirCapabilities currentMemUse];
-}
-
 - (id) initWithContext:(FREContext)extensionContext {
     
     if (self = [super init]) {
@@ -140,13 +134,21 @@ static double startingMem = 0;
 
 + (double) currentMemUse {
     
+    struct mach_task_basic_info info;
+    mach_msg_type_number_t size = MACH_TASK_BASIC_INFO_COUNT;
+    kern_return_t kerr = task_info(mach_task_self(), MACH_TASK_BASIC_INFO, (task_info_t)&info, &size);
+    return (kerr == KERN_SUCCESS) ? info.resident_size : 0; // size in bytes
+}
+
++ (double) currentVirtualMemUse {
+    
     vm_statistics_data_t vmStats;
     mach_msg_type_number_t infoCount = HOST_VM_INFO_COUNT;
     kern_return_t kernReturn = host_statistics(mach_host_self(), HOST_VM_INFO, (host_info_t)&vmStats, &infoCount);
-    
+   
     if (kernReturn != KERN_SUCCESS)
         return LONG_MAX;
-    
+   
     return vm_page_size * vmStats.free_count;
 }
 
@@ -804,8 +806,10 @@ DEFINE_ANE_FUNCTION(getCurrentMem) {
     return FPANE_DoubleToFREObject(bytes);
 }
 
-DEFINE_ANE_FUNCTION(getStartingMem) {
-    return FPANE_DoubleToFREObject(startingMem);
+DEFINE_ANE_FUNCTION(getCurrentVirtualMem) {
+    
+    double bytes = [AirCapabilities currentVirtualMemUse];
+    return FPANE_DoubleToFREObject(bytes);
 }
 
 void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) {
@@ -837,7 +841,7 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
         MAP_FUNCTION(postPictureOnInstagram, NULL),
         MAP_FUNCTION(getLocale, NULL),
         MAP_FUNCTION(getCurrentMem, NULL),
-        MAP_FUNCTION(getStartingMem, NULL)
+        MAP_FUNCTION(getCurrentVirtualMem, NULL)
     };
     
     *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);

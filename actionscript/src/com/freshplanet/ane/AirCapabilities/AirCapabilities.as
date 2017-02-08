@@ -307,21 +307,23 @@ package com.freshplanet.ane.AirCapabilities {
          */
         public function getCurrentMem():Number {
 
-            if (Capabilities.manufacturer.indexOf("iOS") > -1)
-                return _extContext.call("getCurrentMem") as Number;
+            var ret:Object = _extContext.call("getCurrentMem");
+            if (ret is Error)
+                throw ret;
             else
-                return 0;
+                return ret ? ret as Number : 0;
         }
 
         /**
-         * @return  amount of RAM available to the app
+         * @return  amount of RAM used by the VM
          */
-        public function getStartingMem():Number {
+        public function getCurrentVirtualMem():Number {
 
-            if (Capabilities.manufacturer.indexOf("iOS") > -1)
-                return _extContext.call("getStartingMem") as Number;
+            var ret:Object = _extContext.call("getCurrentVirtualMem");
+            if (ret is Error)
+                throw ret;
             else
-                return 0;
+                return ret ? ret as Number : 0;
         }
 
         /**
