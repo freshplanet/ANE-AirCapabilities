@@ -38,21 +38,24 @@
     <!-- Android -->
     <target name="android" description="Build Android Library">
 
-        <!-- make the build directory for the java code -->
-        <mkdir dir="temp/android/"/>
-        <mkdir dir="temp/android/classes"/>
+        <property name="android.platform.home" value="${android.sdk.home}/platforms/android-${android.platform}"/>
 
-        <javac srcdir="../android/src" destdir="temp/android/classes/" includeantruntime="false" source="1.6" target="1.6">
+        <!-- make the build directory for the java code -->
+        <mkdir dir="temp/android/build"/>
+
+        <javac destdir="temp/android/build/" includeantruntime="false" source="1.7" target="1.7">
+            <src path="../android/src"/>
             <classpath>
-                <pathelement location="${android.sdk.home}/platforms/android-${android.platform}/android.jar"/>
+                <pathelement location="${android.platform.home}/android.jar"/>
                 <pathelement location="${air.sdk.home}/lib/android/FlashRuntimeExtensions.jar"/>
             </classpath>
         </javac>
 
-        <jar basedir="temp/android/classes" destfile="temp/android/lib${name}.jar"/>
+        <!-- make the jar -->
+        <jar basedir="temp/android/build" destfile="temp/android/lib${name}.jar"/>
 
         <!-- remove the build classes -->
-        <delete dir="temp/android/classes/"/>
+        <delete dir="temp/android/build/"/>
     </target>
 
     <!-- Actionscript -->
