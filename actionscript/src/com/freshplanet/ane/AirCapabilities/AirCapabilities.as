@@ -307,6 +307,9 @@ package com.freshplanet.ane.AirCapabilities {
          */
         public function getCurrentMem():Number {
 
+			if (!isSupported)
+				return -1;
+
             var ret:Object = _extContext.call("getCurrentMem");
             if (ret is Error)
                 throw ret;
@@ -319,7 +322,7 @@ package com.freshplanet.ane.AirCapabilities {
          */
         public function getCurrentVirtualMem():Number {
 
-            if (Capabilities.manufacturer.indexOf("Android") > -1)
+            if (Capabilities.manufacturer.indexOf("iOS") == -1)
                 return -1;
 
             var ret:Object = _extContext.call("getCurrentVirtualMem");
