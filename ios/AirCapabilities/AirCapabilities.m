@@ -812,6 +812,32 @@ DEFINE_ANE_FUNCTION(getCurrentVirtualMem) {
     return FPANE_DoubleToFREObject(bytes);
 }
 
+DEFINE_ANE_FUNCTION(canRequestReview) {
+    
+    BOOL value = NO;
+    if ([NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10,3,0}]) {
+        value = YES;
+    }
+    else {
+        value = NO;
+    }
+    
+    FREObject result = nil;
+    FRENewObjectFromBool(value, &result);
+    
+    return result;
+    
+}
+
+DEFINE_ANE_FUNCTION(requestReview) {
+    if (![NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10,3,0}]) {
+        return nil;
+    }
+    [SKStoreReviewController requestReview];
+
+    return nil;
+}
+
 void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) {
     
     AirCapabilities* controller = [[AirCapabilities alloc] initWithContext:ctx];
@@ -841,7 +867,9 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
         MAP_FUNCTION(postPictureOnInstagram, NULL),
         MAP_FUNCTION(getLocale, NULL),
         MAP_FUNCTION(getCurrentMem, NULL),
-        MAP_FUNCTION(getCurrentVirtualMem, NULL)
+        MAP_FUNCTION(getCurrentVirtualMem, NULL),
+        MAP_FUNCTION(canRequestReview, NULL),
+        MAP_FUNCTION(requestReview, NULL)
     };
     
     *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);
