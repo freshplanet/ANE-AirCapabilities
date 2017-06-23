@@ -332,6 +332,31 @@ package com.freshplanet.ane.AirCapabilities {
                 return ret ? ret as Number : 0;
         }
 
+		/**
+		 * @return
+		 */
+		public function canRequestReview():Boolean {
+
+			if (!isSupported)
+				return false;
+
+			if (Capabilities.manufacturer.indexOf("iOS") == -1)
+				return false;
+
+			return _extContext.call("canRequestReview");
+		}
+
+		/**
+		 * @return
+		 */
+		public function requestReview():void {
+
+			if (!canRequestReview())
+				return;
+
+			_extContext.call("requestReview");
+		}
+
         /**
          *
          * PRIVATE
