@@ -17,15 +17,18 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 
-package com.freshplanet.capabilities;
+package com.freshplanet.ane.AirCapabilities;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
+import com.adobe.fre.FREObject;
 
 public class ExtensionContext extends FREContext {
 
@@ -45,6 +48,27 @@ public class ExtensionContext extends FREContext {
 		
 		Extension.context = null;
 	}
+
+    private FREFunction getCurrentMem = new FREFunction() {
+        @Override
+        public FREObject call(FREContext ctx, FREObject[] args) {
+
+            try {
+
+                Runtime info = Runtime.getRuntime();
+                long freeSize = info.freeMemory();
+                long totalSize = info.totalMemory();
+                long usedSize = totalSize - freeSize;
+
+                return FREObject.newObject(usedSize);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    };
 
 	/**
 	 * Registers AS function name to Java Function Class
@@ -74,7 +98,8 @@ public class ExtensionContext extends FREContext {
 		functionMap.put("setLogging", new SetLogging());
 		functionMap.put("traceLog", new LogFunction());
 		functionMap.put("hasInstagram", new HasInstagramFunction());
-		functionMap.put("postPictureOnInstagram", new PostPictureOnInstagramFunction());
+        functionMap.put("postPictureOnInstagram", new PostPictureOnInstagramFunction());
+        functionMap.put("getCurrentMem", getCurrentMem);
 		return functionMap;	
 	}
 

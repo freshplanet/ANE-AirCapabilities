@@ -1,4 +1,4 @@
-package com.freshplanet.capabilities;
+package com.freshplanet.ane.AirCapabilities;
 
 import android.content.Intent;
 import android.net.Uri;

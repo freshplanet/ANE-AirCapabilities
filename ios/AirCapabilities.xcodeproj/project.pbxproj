@@ -7,113 +7,82 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16E1302C1B3C8E830054DE5F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E1302B1B3C8E830054DE5F /* StoreKit.framework */; };
-		5A7B108D162F80630057D83F /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7B108C162F80630057D83F /* Twitter.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		5AF18040157EC4C80043C2CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF1803F157EC4C80043C2CF /* Foundation.framework */; };
-		5AF18046157EC4C80043C2CF /* AirCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF18045157EC4C80043C2CF /* AirCapabilities.m */; };
-		5AF18055157EC61C0043C2CF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF18054157EC61C0043C2CF /* UIKit.framework */; };
-		5AF1805D157EC90F0043C2CF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF1805C157EC90F0043C2CF /* MessageUI.framework */; };
-		FA70AA3C1743D3C200DD2457 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = FA70AA3B1743D3C200DD2457 /* FlashRuntimeExtensions.h */; };
+		160643551E3A90FA0076660A /* FPANEUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 160643541E3A90FA0076660A /* FPANEUtils.m */; };
+		16EFD4751E3A903300ED8CEE /* AirCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4741E3A903300ED8CEE /* AirCapabilities.m */; };
+		16EFD4761E3A903300ED8CEE /* AirCapabilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16EFD4731E3A903300ED8CEE /* AirCapabilities.h */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		16EFD46E1E3A903300ED8CEE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				16EFD4761E3A903300ED8CEE /* AirCapabilities.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		16E1302B1B3C8E830054DE5F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		5A7B108C162F80630057D83F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
-		5AF1803C157EC4C80043C2CF /* libAirCapabilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirCapabilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5AF1803F157EC4C80043C2CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		5AF18043157EC4C80043C2CF /* AirCapabilities-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirCapabilities-Prefix.pch"; sourceTree = "<group>"; };
-		5AF18044157EC4C80043C2CF /* AirCapabilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirCapabilities.h; sourceTree = "<group>"; };
-		5AF18045157EC4C80043C2CF /* AirCapabilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirCapabilities.m; sourceTree = "<group>"; };
-		5AF18054157EC61C0043C2CF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		5AF1805C157EC90F0043C2CF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		FA70AA3B1743D3C200DD2457 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = SOURCE_ROOT; };
+		160643521E3A90FA0076660A /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
+		160643531E3A90FA0076660A /* FPANEUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPANEUtils.h; sourceTree = "<group>"; };
+		160643541E3A90FA0076660A /* FPANEUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPANEUtils.m; sourceTree = "<group>"; };
+		16EFD4701E3A903300ED8CEE /* libAirCapabilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirCapabilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		16EFD4731E3A903300ED8CEE /* AirCapabilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirCapabilities.h; sourceTree = "<group>"; };
+		16EFD4741E3A903300ED8CEE /* AirCapabilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirCapabilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5AF18039157EC4C80043C2CF /* Frameworks */ = {
+		16EFD46D1E3A903300ED8CEE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16E1302C1B3C8E830054DE5F /* StoreKit.framework in Frameworks */,
-				5AF1805D157EC90F0043C2CF /* MessageUI.framework in Frameworks */,
-				5AF18055157EC61C0043C2CF /* UIKit.framework in Frameworks */,
-				5AF18040157EC4C80043C2CF /* Foundation.framework in Frameworks */,
-				5A7B108D162F80630057D83F /* Twitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5AF18031157EC4C80043C2CF = {
+		16EFD4671E3A903300ED8CEE = {
 			isa = PBXGroup;
 			children = (
-				5AF18041157EC4C80043C2CF /* AirCapabilities */,
-				5AF1803E157EC4C80043C2CF /* Frameworks */,
-				5AF1803D157EC4C80043C2CF /* Products */,
+				16EFD4721E3A903300ED8CEE /* AirCapabilities */,
+				16EFD4711E3A903300ED8CEE /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		5AF1803D157EC4C80043C2CF /* Products */ = {
+		16EFD4711E3A903300ED8CEE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5AF1803C157EC4C80043C2CF /* libAirCapabilities.a */,
+				16EFD4701E3A903300ED8CEE /* libAirCapabilities.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5AF1803E157EC4C80043C2CF /* Frameworks */ = {
+		16EFD4721E3A903300ED8CEE /* AirCapabilities */ = {
 			isa = PBXGroup;
 			children = (
-				16E1302B1B3C8E830054DE5F /* StoreKit.framework */,
-				5A7B108C162F80630057D83F /* Twitter.framework */,
-				5AF1805C157EC90F0043C2CF /* MessageUI.framework */,
-				5AF18054157EC61C0043C2CF /* UIKit.framework */,
-				5AF1803F157EC4C80043C2CF /* Foundation.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5AF18041157EC4C80043C2CF /* AirCapabilities */ = {
-			isa = PBXGroup;
-			children = (
-				5AF18044157EC4C80043C2CF /* AirCapabilities.h */,
-				5AF18045157EC4C80043C2CF /* AirCapabilities.m */,
-				5AF18042157EC4C80043C2CF /* Supporting Files */,
+				160643521E3A90FA0076660A /* FlashRuntimeExtensions.h */,
+				160643531E3A90FA0076660A /* FPANEUtils.h */,
+				160643541E3A90FA0076660A /* FPANEUtils.m */,
+				16EFD4731E3A903300ED8CEE /* AirCapabilities.h */,
+				16EFD4741E3A903300ED8CEE /* AirCapabilities.m */,
 			);
 			path = AirCapabilities;
 			sourceTree = "<group>";
 		};
-		5AF18042157EC4C80043C2CF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FA70AA3B1743D3C200DD2457 /* FlashRuntimeExtensions.h */,
-				5AF18043157EC4C80043C2CF /* AirCapabilities-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		5AF1803A157EC4C80043C2CF /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA70AA3C1743D3C200DD2457 /* FlashRuntimeExtensions.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		5AF1803B157EC4C80043C2CF /* AirCapabilities */ = {
+		16EFD46F1E3A903300ED8CEE /* AirCapabilities */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5AF18049157EC4C80043C2CF /* Build configuration list for PBXNativeTarget "AirCapabilities" */;
+			buildConfigurationList = 16EFD4791E3A903300ED8CEE /* Build configuration list for PBXNativeTarget "AirCapabilities" */;
 			buildPhases = (
-				5AF18038157EC4C80043C2CF /* Sources */,
-				5AF18039157EC4C80043C2CF /* Frameworks */,
-				5AF1803A157EC4C80043C2CF /* Headers */,
+				16EFD46C1E3A903300ED8CEE /* Sources */,
+				16EFD46D1E3A903300ED8CEE /* Frameworks */,
+				16EFD46E1E3A903300ED8CEE /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -121,112 +90,162 @@
 			);
 			name = AirCapabilities;
 			productName = AirCapabilities;
-			productReference = 5AF1803C157EC4C80043C2CF /* libAirCapabilities.a */;
+			productReference = 16EFD4701E3A903300ED8CEE /* libAirCapabilities.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		5AF18033157EC4C80043C2CF /* Project object */ = {
+		16EFD4681E3A903300ED8CEE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Freshplanet, Inc.";
+				TargetAttributes = {
+					16EFD46F1E3A903300ED8CEE = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
-			buildConfigurationList = 5AF18036157EC4C80043C2CF /* Build configuration list for PBXProject "AirCapabilities" */;
+			buildConfigurationList = 16EFD46B1E3A903300ED8CEE /* Build configuration list for PBXProject "AirCapabilities" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 5AF18031157EC4C80043C2CF;
-			productRefGroup = 5AF1803D157EC4C80043C2CF /* Products */;
+			mainGroup = 16EFD4671E3A903300ED8CEE;
+			productRefGroup = 16EFD4711E3A903300ED8CEE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5AF1803B157EC4C80043C2CF /* AirCapabilities */,
+				16EFD46F1E3A903300ED8CEE /* AirCapabilities */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5AF18038157EC4C80043C2CF /* Sources */ = {
+		16EFD46C1E3A903300ED8CEE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5AF18046157EC4C80043C2CF /* AirCapabilities.m in Sources */,
+				160643551E3A90FA0076660A /* FPANEUtils.m in Sources */,
+				16EFD4751E3A903300ED8CEE /* AirCapabilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		5AF18047157EC4C80043C2CF /* Debug */ = {
+		16EFD4771E3A903300ED8CEE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		5AF18048157EC4C80043C2CF /* Release */ = {
+		16EFD4781E3A903300ED8CEE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
-				COPY_PHASE_STRIP = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		5AF1804A157EC4C80043C2CF /* Debug */ = {
+		16EFD47A1E3A903300ED8CEE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				DSTROOT = /tmp/AirCapabilities.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AirCapabilities/AirCapabilities-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INSTALL_PATH = ../;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AirCapabilities",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		5AF1804B157EC4C80043C2CF /* Release */ = {
+		16EFD47B1E3A903300ED8CEE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				DSTROOT = /tmp/AirCapabilities.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AirCapabilities/AirCapabilities-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INSTALL_PATH = ../;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AirCapabilities",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -236,25 +255,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5AF18036157EC4C80043C2CF /* Build configuration list for PBXProject "AirCapabilities" */ = {
+		16EFD46B1E3A903300ED8CEE /* Build configuration list for PBXProject "AirCapabilities" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5AF18047157EC4C80043C2CF /* Debug */,
-				5AF18048157EC4C80043C2CF /* Release */,
+				16EFD4771E3A903300ED8CEE /* Debug */,
+				16EFD4781E3A903300ED8CEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5AF18049157EC4C80043C2CF /* Build configuration list for PBXNativeTarget "AirCapabilities" */ = {
+		16EFD4791E3A903300ED8CEE /* Build configuration list for PBXNativeTarget "AirCapabilities" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5AF1804A157EC4C80043C2CF /* Debug */,
-				5AF1804B157EC4C80043C2CF /* Release */,
+				16EFD47A1E3A903300ED8CEE /* Debug */,
+				16EFD47B1E3A903300ED8CEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 5AF18033157EC4C80043C2CF /* Project object */;
+	rootObject = 16EFD4681E3A903300ED8CEE /* Project object */;
 }

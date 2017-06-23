@@ -1,5 +1,4 @@
-<!--
-//////////////////////////////////////////////////////////////////////////////////////
+<!--//////////////////////////////////////////////////////////////////////////////////////
 //
 //  Copyright 2012 Freshplanet (http://freshplanet.com | opensource@freshplanet.com)
 //  
@@ -15,17 +14,12 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //  
-//////////////////////////////////////////////////////////////////////////////////////
--->
+//////////////////////////////////////////////////////////////////////////////////////-->
 
-<extension xmlns="http://ns.adobe.com/air/extension/3.1">
-
-    <id>com.freshplanet.AirCapabilities</id>
-
+<extension xmlns="http://ns.adobe.com/air/extension/20.0">
+    <id>com.freshplanet.ane.AirCapabilities</id>
     <versionNumber>1</versionNumber>
-
     <platforms>
-
         <platform name="iPhone-ARM">
             <applicationDeployment>
                 <nativeLibrary>libAirCapabilities.a</nativeLibrary>
@@ -33,19 +27,15 @@
                 <finalizer>AirCapabilitiesFinalizer</finalizer>
             </applicationDeployment>
         </platform>
-
         <platform name="Android-ARM"> 
             <applicationDeployment> 
                 <nativeLibrary>libAirCapabilities.jar</nativeLibrary> 
-                <initializer>com.freshplanet.capabilities.Extension</initializer> 
-                <finalizer>com.freshplanet.capabilities.Extension</finalizer> 
+                <initializer>com.freshplanet.ane.AirCapabilities.Extension</initializer> 
+                <finalizer>com.freshplanet.ane.AirCapabilities.Extension</finalizer> 
             </applicationDeployment> 
         </platform>
-
         <platform name="default"> 
             <applicationDeployment/> 
         </platform> 
-
     </platforms>
-    
 </extension>
