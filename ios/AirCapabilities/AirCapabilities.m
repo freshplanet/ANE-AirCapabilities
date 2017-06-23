@@ -12,6 +12,7 @@
 #import <sys/utsname.h>
 #import <UIKit/UIApplication.h>
 #import <Twitter/TWTweetComposeViewController.h>
+#import <StoreKit/SKStoreReviewController.h>
 
 @implementation AirCapabilities
 

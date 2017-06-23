@@ -1,7 +1,8 @@
 <platform xmlns="http://ns.adobe.com/air/extension/20.0">
     <sdkVersion>6.0</sdkVersion>
     <linkerOptions>
-        <option>-framework MessageUI</option> 
+        <option>-framework MessageUI</option>
+        <option>-framework StoreKit</option>
         <option>-weak_framework Twitter</option>
     </linkerOptions> 
 </platform>
