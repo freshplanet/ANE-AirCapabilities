@@ -351,10 +351,7 @@ package com.freshplanet.ane.AirCapabilities {
 		 */
 		public function requestReview():void {
 
-			if (!isSupported)
-				return;
-
-			if (Capabilities.manufacturer.indexOf("iOS") == -1)
+			if (!canRequestReview())
 				return;
 
 			_extContext.call("requestReview");

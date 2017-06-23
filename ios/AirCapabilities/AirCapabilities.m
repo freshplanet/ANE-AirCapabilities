@@ -815,13 +815,10 @@ DEFINE_ANE_FUNCTION(getCurrentVirtualMem) {
 DEFINE_ANE_FUNCTION(canRequestReview) {
     
     BOOL value = NO;
-    if ([NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10,3,0}]) {
+
+    if ([NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10,3,0}])
         value = YES;
-    }
-    else {
-        value = NO;
-    }
-    
+
     FREObject result = nil;
     FRENewObjectFromBool(value, &result);
     
@@ -830,11 +827,8 @@ DEFINE_ANE_FUNCTION(canRequestReview) {
 }
 
 DEFINE_ANE_FUNCTION(requestReview) {
-    if (![NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10,3,0}]) {
-        return nil;
-    }
-    [SKStoreReviewController requestReview];
 
+    [SKStoreReviewController requestReview];
     return nil;
 }
 
