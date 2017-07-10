@@ -2,7 +2,7 @@ package com.freshplanet.ane.AirCapabilities
 {
 	import flash.external.ExtensionContext;
 
-	internal class NativeLogger implements INativeLogger
+	internal class NativeLogger implements ILogger
 	{
 		private var _context:ExtensionContext;
 		private static const VERBOSE:int = 2;
