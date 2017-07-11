@@ -19,10 +19,9 @@ import com.freshplanet.ane.AirCapabilities.AirCapabilities;
 import flash.display.Sprite;
 import flash.display.StageAlign;
 import flash.events.Event;
-import flash.text.TextField;
 
-import ui.ScrollableContainer;
-import ui.TestBlock;
+import com.freshplanet.ui.ScrollableContainer;
+import com.freshplanet.ui.TestBlock;
 
 [SWF(backgroundColor="#057fbc", frameRate='60')]
 public class Main extends Sprite {

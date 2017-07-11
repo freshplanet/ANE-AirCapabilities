@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ui {
+package com.freshplanet.ui {
 
     import flash.display.Sprite;
     import flash.events.Event;
