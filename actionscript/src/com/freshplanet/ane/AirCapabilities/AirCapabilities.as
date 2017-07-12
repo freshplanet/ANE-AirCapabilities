@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2017 FreshPlanet
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 
 package com.freshplanet.ane.AirCapabilities {
 
+	import com.freshplanet.ane.AirCapabilities.events.OpenURLEvent;
 	import flash.display.BitmapData;
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
@@ -42,7 +43,8 @@ package com.freshplanet.ane.AirCapabilities {
 		public function setLogging(value:Boolean):void {
 
 			_doLogging = value;
-			_extContext.call("setLogging", value);
+			if (isSupported)
+				_extContext.call("setLogging", value);
 		}
 		
 		public function get nativeLogger():ILogger {
@@ -243,7 +245,7 @@ package com.freshplanet.ane.AirCapabilities {
          */
 		public function openURL(url:String):void {
 
-			if (isSupported && canOpenURL(url))
+			if (canOpenURL(url))
 				_extContext.call("openURL", url);
 		}
 
@@ -263,11 +265,10 @@ package com.freshplanet.ane.AirCapabilities {
          */
         public function getOSVersion():String {
 
-            var value:String = "";
             if (isSupported)
-                value = _extContext.call("getOSVersion") as String;
+                return _extContext.call("getOSVersion") as String;
 
-            return value;
+            return "";
         }
 
 

@@ -13,18 +13,26 @@
  * limitations under the License.
  */
 
-package com.freshplanet.ane.AirCapabilities {
-	/**
-	 * 
-	 * A logging interface patterned after android.utils.Log (i.e. please use short strings for 'tag' 
-	 * and put any longer stuff in the additional arguments instead).
-	 * 
-	 */	
-	public interface ILogger {
-		function verbose(tag:String, ...params):void;
-		function debug(tag:String, ...params):void;
-		function info(tag:String, ...params):void;
-		function warn(tag:String, ...params):void;
-		function error(tag:String, ...params):void;
+package com.freshplanet.ane.AirCapabilities.events {
+
+	import flash.events.Event;
+	
+	public class OpenURLEvent extends Event {
+
+		static public const OPEN_URL_SUCCESS:String = "OpenUrlSuccess";
+		static public const TO_APP_STORE:String = "STORE";
+		static public const TO_APP:String = "APP";
+		
+		private var _openType:String;
+		
+		public function OpenURLEvent(type:String, openType:String, bubbles:Boolean = false, cancelable:Boolean = false) {
+
+			_openType = openType;
+			super(type, bubbles, cancelable);
+		}
+		
+		public function get openType():String {
+			return this._openType;
+		}
 	}
 }

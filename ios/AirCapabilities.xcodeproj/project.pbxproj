@@ -10,6 +10,7 @@
 		160643551E3A90FA0076660A /* FPANEUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 160643541E3A90FA0076660A /* FPANEUtils.m */; };
 		16EFD4751E3A903300ED8CEE /* AirCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4741E3A903300ED8CEE /* AirCapabilities.m */; };
 		16EFD4761E3A903300ED8CEE /* AirCapabilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16EFD4731E3A903300ED8CEE /* AirCapabilities.h */; };
+		B13A59C89D0BB34E3375A09E /* libPods-AirCapabilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +33,9 @@
 		16EFD4701E3A903300ED8CEE /* libAirCapabilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirCapabilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EFD4731E3A903300ED8CEE /* AirCapabilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirCapabilities.h; sourceTree = "<group>"; };
 		16EFD4741E3A903300ED8CEE /* AirCapabilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirCapabilities.m; sourceTree = "<group>"; };
+		42A4A57CCDEA75AEDD32FBFE /* Pods-AirCapabilities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCapabilities.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities.release.xcconfig"; sourceTree = "<group>"; };
+		85BFE1EB43E3A5002171425B /* Pods-AirCapabilities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCapabilities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities.debug.xcconfig"; sourceTree = "<group>"; };
+		B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirCapabilities.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B13A59C89D0BB34E3375A09E /* libPods-AirCapabilities.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,8 +53,13 @@
 		16EFD4671E3A903300ED8CEE = {
 			isa = PBXGroup;
 			children = (
+				160643521E3A90FA0076660A /* FlashRuntimeExtensions.h */,
+				160643531E3A90FA0076660A /* FPANEUtils.h */,
+				160643541E3A90FA0076660A /* FPANEUtils.m */,
 				16EFD4721E3A903300ED8CEE /* AirCapabilities */,
 				16EFD4711E3A903300ED8CEE /* Products */,
+				AD72F1D5F70DEF51F6A1685D /* Pods */,
+				D448D5D8A2798701D2A60F55 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,13 +74,27 @@
 		16EFD4721E3A903300ED8CEE /* AirCapabilities */ = {
 			isa = PBXGroup;
 			children = (
-				160643521E3A90FA0076660A /* FlashRuntimeExtensions.h */,
-				160643531E3A90FA0076660A /* FPANEUtils.h */,
-				160643541E3A90FA0076660A /* FPANEUtils.m */,
 				16EFD4731E3A903300ED8CEE /* AirCapabilities.h */,
 				16EFD4741E3A903300ED8CEE /* AirCapabilities.m */,
 			);
 			path = AirCapabilities;
+			sourceTree = "<group>";
+		};
+		AD72F1D5F70DEF51F6A1685D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				85BFE1EB43E3A5002171425B /* Pods-AirCapabilities.debug.xcconfig */,
+				42A4A57CCDEA75AEDD32FBFE /* Pods-AirCapabilities.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D448D5D8A2798701D2A60F55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 16EFD4791E3A903300ED8CEE /* Build configuration list for PBXNativeTarget "AirCapabilities" */;
 			buildPhases = (
+				08AD9BF1519A4B532720CDC4 /* [CP] Check Pods Manifest.lock */,
 				16EFD46C1E3A903300ED8CEE /* Sources */,
 				16EFD46D1E3A903300ED8CEE /* Frameworks */,
 				16EFD46E1E3A903300ED8CEE /* CopyFiles */,
+				36CC867F3630EE48BB75FF20 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -124,6 +150,39 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08AD9BF1519A4B532720CDC4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		36CC867F3630EE48BB75FF20 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		16EFD46C1E3A903300ED8CEE /* Sources */ = {
@@ -229,6 +288,7 @@
 		};
 		16EFD47A1E3A903300ED8CEE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85BFE1EB43E3A5002171425B /* Pods-AirCapabilities.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -242,6 +302,7 @@
 		};
 		16EFD47B1E3A903300ED8CEE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42A4A57CCDEA75AEDD32FBFE /* Pods-AirCapabilities.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
