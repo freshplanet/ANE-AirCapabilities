@@ -539,7 +539,7 @@ DEFINE_ANE_FUNCTION(openExternalApplication) {
     return nil;
 }
 
-DEFINE_ANE_FUNCTION(canOpenURL) {
+DEFINE_ANE_FUNCTION(AirCapabilitiesCanOpenURL) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -559,7 +559,7 @@ DEFINE_ANE_FUNCTION(canOpenURL) {
     return nil;
 }
 
-DEFINE_ANE_FUNCTION(openURL) {
+DEFINE_ANE_FUNCTION(AirCapabilitiesOpenURL) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -579,7 +579,7 @@ DEFINE_ANE_FUNCTION(openURL) {
     return nil;
 }
 
-DEFINE_ANE_FUNCTION(setLogging) {
+DEFINE_ANE_FUNCTION(AirCapabilitiesSetLogging) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -787,9 +787,9 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
         MAP_FUNCTION(postPictureOnTwitter, NULL),
         MAP_FUNCTION(openExternalApplication, NULL),
         MAP_FUNCTION(getOSVersion, NULL),
-        MAP_FUNCTION(canOpenURL, NULL),
-        MAP_FUNCTION(openURL, NULL),
-        MAP_FUNCTION(setLogging, NULL),
+        { (const uint8_t*)"canOpenURL", NULL, &AirCapabilitiesCanOpenURL }, // these method names have conflicts with other libs
+        { (const uint8_t*)"openURL", NULL, &AirCapabilitiesOpenURL },
+        { (const uint8_t*)"setLogging", NULL, &AirCapabilitiesSetLogging },
         MAP_FUNCTION(traceLog, NULL),
         MAP_FUNCTION(openModalAppStore, NULL),
         MAP_FUNCTION(hasInstagramEnabled, NULL),
