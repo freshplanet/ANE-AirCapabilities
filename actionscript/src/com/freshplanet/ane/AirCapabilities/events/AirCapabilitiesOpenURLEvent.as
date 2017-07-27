@@ -17,7 +17,7 @@ package com.freshplanet.ane.AirCapabilities.events {
 
 	import flash.events.Event;
 	
-	public class OpenURLEvent extends Event {
+	public class AirCapabilitiesOpenURLEvent extends Event {
 
 		static public const OPEN_URL_SUCCESS:String = "OpenUrlSuccess";
 		static public const TO_APP_STORE:String = "STORE";
@@ -25,7 +25,7 @@ package com.freshplanet.ane.AirCapabilities.events {
 		
 		private var _openType:String;
 		
-		public function OpenURLEvent(type:String, openType:String, bubbles:Boolean = false, cancelable:Boolean = false) {
+		public function AirCapabilitiesOpenURLEvent(type:String, openType:String, bubbles:Boolean = false, cancelable:Boolean = false) {
 
 			_openType = openType;
 			super(type, bubbles, cancelable);

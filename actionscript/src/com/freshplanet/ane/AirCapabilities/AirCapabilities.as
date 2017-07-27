@@ -15,7 +15,8 @@
 
 package com.freshplanet.ane.AirCapabilities {
 
-	import com.freshplanet.ane.AirCapabilities.events.OpenURLEvent;
+import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesLowMemoryEvent;
+import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 	import flash.display.BitmapData;
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
@@ -367,7 +368,11 @@ package com.freshplanet.ane.AirCapabilities {
             if (event.code == "log")
 	            _doLogging && trace("[AirCapabilities] " + event.level);
             else if (event.code == "OPEN_URL")
-                this.dispatchEvent(new OpenURLEvent(OpenURLEvent.OPEN_URL_SUCCESS, event.level));
+                this.dispatchEvent(new AirCapabilitiesOpenURLEvent(AirCapabilitiesOpenURLEvent.OPEN_URL_SUCCESS, event.level));
+            else if (event.code == AirCapabilitiesLowMemoryEvent.LOW_MEMORY_WARNING) {
+	            var memory:Number = Number(event.level);
+	            this.dispatchEvent(new AirCapabilitiesLowMemoryEvent(event.code, memory));
+            }
             else
                 this.dispatchEvent(event);
         }

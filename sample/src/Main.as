@@ -15,6 +15,8 @@
 package {
 
 import com.freshplanet.ane.AirCapabilities.AirCapabilities;
+import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesLowMemoryEvent;
+import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 
 import flash.display.Sprite;
 import flash.display.StageAlign;
@@ -52,6 +54,10 @@ public class Main extends Sprite {
         }
 
         AirCapabilities.instance.setLogging(true);
+        AirCapabilities.instance.addEventListener(AirCapabilitiesLowMemoryEvent.LOW_MEMORY_WARNING, onLowMemoryWarning);
+        // ios only
+        AirCapabilities.instance.addEventListener(AirCapabilitiesOpenURLEvent.OPEN_URL_SUCCESS, onOpenURLSuccess);
+
 
         var blocks:Array = [];
 
@@ -109,6 +115,14 @@ public class Main extends Sprite {
             block.y = nextY;
             nextY +=  block.height + indent;
         }
+    }
+
+    private function onOpenURLSuccess(event:AirCapabilitiesOpenURLEvent):void {
+        trace("Open url success ", event.openType);
+    }
+
+    private function onLowMemoryWarning(event:AirCapabilitiesLowMemoryEvent):void {
+        trace("Low memory warning : ", event.currentMemory);
     }
 }
 }
