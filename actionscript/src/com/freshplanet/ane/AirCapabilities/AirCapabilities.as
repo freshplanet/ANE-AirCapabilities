@@ -1,23 +1,22 @@
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright 2012 Freshplanet (http://freshplanet.com | opensource@freshplanet.com)
-//  
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//  
-//    http://www.apache.org/licenses/LICENSE-2.0
-//  
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//  
-//////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Copyright 2017 FreshPlanet
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.freshplanet.ane.AirCapabilities {
 
+import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesLowMemoryEvent;
+import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 	import flash.display.BitmapData;
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
@@ -26,57 +25,42 @@ package com.freshplanet.ane.AirCapabilities {
 
 	public class AirCapabilities extends EventDispatcher {
 
-        static public const LOW_MEMORY_WARNING:String = "LOW_MEMORY_WARNING";
+		// --------------------------------------------------------------------------------------//
+		//																						 //
+		// 									   PUBLIC API										 //
+		// 																						 //
+		// --------------------------------------------------------------------------------------//
 
-        static private const EXTENSION_ID:String = "com.freshplanet.ane.AirCapabilities";
-
-        static private var _instance:AirCapabilities = null;
-
-        private var _extContext:ExtensionContext = null;
-        private var _doLogging:Boolean = false;
-		private var _logger:INativeLogger;
-		
-		public function AirCapabilities() {
-
-            super();
-
-            if (_instance)
-                throw new Error("singleton class, use .instance");
-
-			_extContext = ExtensionContext.createExtensionContext(EXTENSION_ID, null);
-			_extContext.addEventListener(StatusEvent.STATUS, _handleStatusEvent);
-			
-			if (isSupported)
-				_logger = new NativeLogger(_extContext);
-			else
-				_logger = new DefaultLogger();
-
-			_instance = this;
-		}
-
+		/**
+		 * Is the ANE supported on the current platform
+		 */
         static public function get isSupported():Boolean {
             return Capabilities.manufacturer.indexOf("iOS") > -1 || Capabilities.manufacturer.indexOf("Android") > -1;
         }
 
+		/**
+		 * If <code>true</code>, logs will be displayed at the ActionScript and native level.
+		 */
 		public function setLogging(value:Boolean):void {
 
 			_doLogging = value;
-			_extContext.call("setLogging", value);
+			if (isSupported)
+				_extContext.call("setLogging", value);
 		}
 		
-		public function get nativeLogger():INativeLogger {
+		public function get nativeLogger():ILogger {
             return _logger;
         }
 
         /**
-         *
+         * AirCapabilities instance
          */
         static public function get instance():AirCapabilities {
 			return _instance != null ? _instance : new AirCapabilities()
 		}
 
         /**
-         *
+         * Is SMS available
          * @return
          */
 		public function hasSmsEnabled():Boolean {
@@ -88,7 +72,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Is Twitter available
          * @return
          */
 		public function hasTwitterEnabled():Boolean {
@@ -100,9 +84,9 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
-         * @param message
-         * @param recipient
+         * Sends an SMS message
+         * @param message to send
+         * @param recipient phonenumber
          */
 		public function sendMsgWithSms(message:String, recipient:String = null):void {
 
@@ -111,7 +95,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Sends a Twitter message
          * @param message
          */
 		public function sendMsgWithTwitter(message:String):void {
@@ -121,7 +105,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Redirect user to Rating page
          * @param appId
          * @param appName
          */
@@ -132,7 +116,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Model of the device
          * @return
          */
 		public function getDeviceModel():String {
@@ -144,7 +128,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Name of the machine
          * @return
          */
 		public function getMachineName():String {
@@ -156,7 +140,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Opens the referral link URL
          * @param url
          */
 		public function processReferralLink(url:String):void {
@@ -166,8 +150,8 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
-         * @param pageId
+         * Opens Facebook page
+         * @param pageId id of the facebook page
          */
 		public function redirectToPageId(pageId:String):void {
 
@@ -176,7 +160,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Opens Twitter account
          * @param twitterAccount
          */
 		public function redirectToTwitterAccount(twitterAccount:String):void {
@@ -186,7 +170,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Is posting pictures on Twitter enabled
          * @return
          */
 		public function canPostPictureOnTwitter():Boolean {
@@ -198,7 +182,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Post new picture on Twitter
          * @param message
          * @param bitmapData
          */
@@ -209,7 +193,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Is Instagram enabled
          * @return
          */
 		public function hasInstagramEnabled():Boolean {
@@ -221,7 +205,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Post new picture on Instagram
          * @param message
          * @param bitmapData
          * @param x
@@ -248,7 +232,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Is opening URLs available
          * @param url
          * @return
          */
@@ -257,17 +241,17 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Open URL
          * @param url
          */
 		public function openURL(url:String):void {
 
-			if (isSupported)
+			if (canOpenURL(url))
 				_extContext.call("openURL", url);
 		}
 
 		/**
-		 *
+		 * Opens modal app store. Available on iOS only
 		 * @param appStoreId	id of the app to open a modal view to (do not include the "id" at the beginning of the number)
 		 */
 		public function openModalAppStoreIOS(appStoreId:String):void {
@@ -277,30 +261,17 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
         /**
-         *
+         * Version of the operating system
          * @return
          */
         public function getOSVersion():String {
 
-            var value:String = "";
             if (isSupported)
-                value = _extContext.call("getOSVersion") as String;
+                return _extContext.call("getOSVersion") as String;
 
-            return value;
+            return "";
         }
 
-        /**
-         *
-         * @return
-         */
-//        public function getLocale():String {
-//
-//            var value:String = null;
-//            if (Capabilities.manufacturer.indexOf("iOS") > -1)
-//                value = _extContext.call("getLocale") as String;
-//
-//            return value;
-//        }
 
         /**
          * @return  current amount of RAM being used in bytes
@@ -333,7 +304,7 @@ package com.freshplanet.ane.AirCapabilities {
         }
 
 		/**
-		 * @return
+		 * @return  is requesting review available. Available on iOS only
 		 */
 		public function canRequestReview():Boolean {
 
@@ -347,7 +318,7 @@ package com.freshplanet.ane.AirCapabilities {
 		}
 
 		/**
-		 * @return
+		 * Request AppStore review. Available on iOS only
 		 */
 		public function requestReview():void {
 
@@ -357,18 +328,51 @@ package com.freshplanet.ane.AirCapabilities {
 			_extContext.call("requestReview");
 		}
 
-        /**
-         *
-         * PRIVATE
-         *
-         */
+		// --------------------------------------------------------------------------------------//
+		//																						 //
+		// 									 	PRIVATE API										 //
+		// 																						 //
+		// --------------------------------------------------------------------------------------//
+
+		static private const EXTENSION_ID:String = "com.freshplanet.ane.AirCapabilities";
+
+		static private var _instance:AirCapabilities = null;
+
+		private var _extContext:ExtensionContext = null;
+		private var _doLogging:Boolean = false;
+		private var _logger:ILogger;
+
+		/**
+		 * "private" singleton constructor
+		 */
+		public function AirCapabilities() {
+
+			super();
+
+			if (_instance)
+				throw new Error("singleton class, use .instance");
+
+			_extContext = ExtensionContext.createExtensionContext(EXTENSION_ID, null);
+			_extContext.addEventListener(StatusEvent.STATUS, _handleStatusEvent);
+
+			if (isSupported)
+				_logger = new NativeLogger(_extContext);
+			else
+				_logger = new DefaultLogger();
+
+			_instance = this;
+		}
 
         private function _handleStatusEvent(event:StatusEvent):void {
 
             if (event.code == "log")
-                trace("[AirCapabilities] " + event.level);
+	            _doLogging && trace("[AirCapabilities] " + event.level);
             else if (event.code == "OPEN_URL")
-                this.dispatchEvent(new OpenURLEvent(OpenURLEvent.OPEN_URL_SUCCESS, event.level));
+                this.dispatchEvent(new AirCapabilitiesOpenURLEvent(AirCapabilitiesOpenURLEvent.OPEN_URL_SUCCESS, event.level));
+            else if (event.code == AirCapabilitiesLowMemoryEvent.LOW_MEMORY_WARNING) {
+	            var memory:Number = Number(event.level);
+	            this.dispatchEvent(new AirCapabilitiesLowMemoryEvent(event.code, memory));
+            }
             else
                 this.dispatchEvent(event);
         }
