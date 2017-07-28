@@ -39,4 +39,5 @@
             <packageName>com.google.android.gms</packageName> 
             <folderName>AirCapabilities-res</folderName> 
         </packagedResource>-->
+    </packagedResources>
 </platform>
