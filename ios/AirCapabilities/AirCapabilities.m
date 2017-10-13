@@ -112,26 +112,22 @@ BOOL doLogging = NO;
 }
 
 - (void) openModalAppStore:(NSString*)appStoreID {
+
+     SKStoreProductViewController* storeController = [[SKStoreProductViewController alloc] init];
+     storeController.delegate = self;
     
-    if (!NSClassFromString(@"SKStoreProductViewController")) // if feature is not available
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]]];
-    else {
-        
-        SKStoreProductViewController* storeController = [[SKStoreProductViewController alloc] init];
-        storeController.delegate = self;
-        
-        [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:storeController animated:YES completion:^{}];
-        
-        [storeController loadProductWithParameters:@{ SKStoreProductParameterITunesItemIdentifier: appStoreID }
-                                   completionBlock:^(BOOL result, NSError *error) {
-                                       
-                                       if (!result) {
-                                           
-                                           [[UIApplication sharedApplication].delegate.window.rootViewController dismissViewControllerAnimated:YES completion:^{}];
-                                           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]]];
-                                       }
-                                   }];
-    }
+     [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:storeController animated:YES completion:^{}];
+    
+     [storeController loadProductWithParameters:@{ SKStoreProductParameterITunesItemIdentifier: appStoreID }
+                                completionBlock:^(BOOL result, NSError *error) {
+                                    
+                                    if (!result) {
+                                        
+                                        [[UIApplication sharedApplication].delegate.window.rootViewController dismissViewControllerAnimated:YES completion:^{}];
+                                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]]];
+                                    }
+                                }];
+
 }
 
 - (void) handleMemoryWarning:(NSNotification*)notification {
@@ -172,10 +168,7 @@ AirCapabilities* GetAirCapabilitiesContextNativeData(FREContext context) {
 DEFINE_ANE_FUNCTION(hasSMS) {
     
     BOOL value = [MFMessageComposeViewController canSendText];
-//    FREObject retBool = nil;
-//    FRENewObjectFromBool(value, &retBool);
-    
-    return FPANE_BOOLToFREObject(value);
+    return AirCapabilities_FPANE_BOOLToFREObject(value);
 }
 
 DEFINE_ANE_FUNCTION(hasTwitter) {
@@ -195,9 +188,7 @@ DEFINE_ANE_FUNCTION(hasTwitter) {
         }
     }
     
-//    FREObject retBool = nil;
-//    FRENewObjectFromBool(value, &retBool);
-    return FPANE_BOOLToFREObject(value);
+    return AirCapabilities_FPANE_BOOLToFREObject(value);
 }
 
 DEFINE_ANE_FUNCTION(sendWithSms) {
@@ -205,11 +196,11 @@ DEFINE_ANE_FUNCTION(sendWithSms) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString* message = FPANE_FREObjectToNSString(argv[0]);
-        NSString* recipientString = FPANE_FREObjectToNSString(argv[1]);
+        NSString* message = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
+        NSString* recipientString = AirCapabilities_FPANE_FREObjectToNSString(argv[1]);
         
         if (message != nil) {
             
@@ -236,10 +227,10 @@ DEFINE_ANE_FUNCTION(sendWithTwitter) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString* message = FPANE_FREObjectToNSString(argv[0]);
+        NSString* message = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
         NSString* urlEncodedMessage = (NSString*)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)message, NULL, (CFStringRef)@"!’\"();:@&=+$,/?%#[]% ", kCFStringEncodingISOLatin1);;
         
         if (message != nil) {
@@ -302,10 +293,10 @@ DEFINE_ANE_FUNCTION(redirectToRating) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString* appId = FPANE_FREObjectToNSString(argv[0]);
+        NSString* appId = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
         NSString* url = nil;
         
         
@@ -329,7 +320,7 @@ DEFINE_ANE_FUNCTION(redirectToRating) {
 DEFINE_ANE_FUNCTION(getDeviceModel) {
     
     NSString* model = [[UIDevice currentDevice] model];
-    FREObject retStr = FPANE_NSStringToFREObject(model);
+    FREObject retStr = AirCapabilities_FPANE_NSStringToFREObject(model);
 
     return retStr;
 }
@@ -338,7 +329,7 @@ DEFINE_ANE_FUNCTION(getMachineName) {
     
 	struct utsname systemInfo;
 	uname(&systemInfo);
-	return FPANE_NSStringToFREObject([NSString stringWithUTF8String:systemInfo.machine]);
+	return AirCapabilities_FPANE_NSStringToFREObject([NSString stringWithUTF8String:systemInfo.machine]);
 }
 
 DEFINE_ANE_FUNCTION(processReferralLink) {
@@ -346,10 +337,10 @@ DEFINE_ANE_FUNCTION(processReferralLink) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString* url = FPANE_FREObjectToNSString(argv[0]);
+        NSString* url = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
         NSURL* nsUrl = [NSURL URLWithString:url];
         [controller openReferralURL:nsUrl];
     }
@@ -364,10 +355,10 @@ DEFINE_ANE_FUNCTION(redirectToPageId) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString* pageId = FPANE_FREObjectToNSString(argv[0]);
+        NSString* pageId = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
         NSString* schemeString = [NSString stringWithFormat:@"fb://profile/%@", pageId];
         NSURL* schemeUrl = [NSURL URLWithString:schemeString];
         
@@ -387,10 +378,10 @@ DEFINE_ANE_FUNCTION(redirectToTwitterAccount) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString* pageId = FPANE_FREObjectToNSString(argv[0]);
+        NSString* pageId = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
         NSString* schemeString = [NSString stringWithFormat:@"twitter://user?screen_name=%@", pageId];
         NSURL* schemeUrl = [NSURL URLWithString:schemeString];
 
@@ -406,23 +397,23 @@ DEFINE_ANE_FUNCTION(redirectToTwitterAccount) {
 }
 
 DEFINE_ANE_FUNCTION(canPostPictureOnTwitter) {
-    return FPANE_BOOLToFREObject([TWTweetComposeViewController canSendTweet]);
+    return AirCapabilities_FPANE_BOOLToFREObject([TWTweetComposeViewController canSendTweet]);
 }
 
 DEFINE_ANE_FUNCTION(getOSVersion) {
     
     NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
-    return FPANE_NSStringToFREObject(systemVersion);
+    return AirCapabilities_FPANE_NSStringToFREObject(systemVersion);
 }
 
 DEFINE_ANE_FUNCTION(postPictureOnTwitter) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString* message = FPANE_FREObjectToNSString(argv[0]);
+        NSString* message = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
         FREBitmapData bitmapData;
         UIImage *rewardImage = nil;
         if (FREAcquireBitmapData(argv[1], &bitmapData) == FRE_OK) {
@@ -503,7 +494,7 @@ DEFINE_ANE_FUNCTION(openExternalApplication) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
         uint32_t arr_len; // array length
@@ -518,11 +509,11 @@ DEFINE_ANE_FUNCTION(openExternalApplication) {
             FREGetArrayElementAt(arr, i, &element);
             
             // Convert to NSString and add it to schemes
-            NSString* elem = FPANE_FREObjectToNSString(element);//[NSString stringWithUTF8String:(char*)elementStr];
+            NSString* elem = AirCapabilities_FPANE_FREObjectToNSString(element);//[NSString stringWithUTF8String:(char*)elementStr];
             [schemes addObject:elem];
         }
         
-        NSString *appStoreString = FPANE_FREObjectToNSString(argv[1]);
+        NSString *appStoreString = AirCapabilities_FPANE_FREObjectToNSString(argv[1]);
         NSURL* appStoreURL = [NSURL URLWithString:appStoreString];
         
         bool canOpenApplication = false;
@@ -543,14 +534,14 @@ DEFINE_ANE_FUNCTION(AirCapabilitiesCanOpenURL) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString *urlString = FPANE_FREObjectToNSString(argv[0]);
+        NSString *urlString = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
         NSURL *url = [NSURL URLWithString:urlString];
         
         BOOL canOpenURL = url ? [[UIApplication sharedApplication] canOpenURL:url] : NO;
-        return FPANE_BOOLToFREObject(canOpenURL);
+        return AirCapabilities_FPANE_BOOLToFREObject(canOpenURL);
     }
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to check can open URL : " stringByAppendingString:exception.reason]];
@@ -563,10 +554,10 @@ DEFINE_ANE_FUNCTION(AirCapabilitiesOpenURL) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString *urlString = FPANE_FREObjectToNSString(argv[0]);
+        NSString *urlString = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
         NSURL *url = [NSURL URLWithString:urlString];
         BOOL canOpenURL = url ? [[UIApplication sharedApplication] canOpenURL:url] : NO;
         
@@ -583,10 +574,10 @@ DEFINE_ANE_FUNCTION(AirCapabilitiesSetLogging) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        doLogging = FPANE_FREObjectToBool(argv[0]);
+        doLogging = AirCapabilities_FPANE_FREObjectToBool(argv[0]);
     }
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to setLogging : " stringByAppendingString:exception.reason]];
@@ -602,12 +593,12 @@ DEFINE_ANE_FUNCTION(traceLog) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSInteger logLevel = FPANE_FREObjectToInt(argv[0]);
-        NSString *tag = FPANE_FREObjectToNSString(argv[1]);
-        NSString *msg = FPANE_FREObjectToNSString(argv[2]);
+        NSInteger logLevel = AirCapabilities_FPANE_FREObjectToInt(argv[0]);
+        NSString *tag = AirCapabilities_FPANE_FREObjectToNSString(argv[1]);
+        NSString *msg = AirCapabilities_FPANE_FREObjectToNSString(argv[2]);
         
         NSString *formatString = nil;
         switch (logLevel) {
@@ -641,10 +632,10 @@ DEFINE_ANE_FUNCTION(openModalAppStore) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString* appStoreID = FPANE_FREObjectToNSString(argv[0]);
+        NSString* appStoreID = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
         [controller openModalAppStore:appStoreID];
     }
     @catch (NSException *exception) {
@@ -656,7 +647,7 @@ DEFINE_ANE_FUNCTION(openModalAppStore) {
 DEFINE_ANE_FUNCTION(hasInstagramEnabled) {
     
     BOOL value = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"instagram://app"]];
-    return FPANE_BOOLToFREObject(value);
+    return AirCapabilities_FPANE_BOOLToFREObject(value);
 }
 
 DEFINE_ANE_FUNCTION(postPictureOnInstagram) {
@@ -664,10 +655,10 @@ DEFINE_ANE_FUNCTION(postPictureOnInstagram) {
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirCapabilities is null", 0);
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
     
     @try {
-        NSString* message = FPANE_FREObjectToNSString(argv[0]);
+        NSString* message = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
         
         FREBitmapData bitmapData;
         UIImage *rewardImage = nil;
@@ -704,10 +695,10 @@ DEFINE_ANE_FUNCTION(postPictureOnInstagram) {
         }
         
         
-        NSInteger xPosition = FPANE_FREObjectToInt(argv[2]);
-        NSInteger yPosition = FPANE_FREObjectToInt(argv[3]);
-        NSInteger width = FPANE_FREObjectToInt(argv[4]);
-        NSInteger height = FPANE_FREObjectToInt(argv[5]);
+        NSInteger xPosition = AirCapabilities_FPANE_FREObjectToInt(argv[2]);
+        NSInteger yPosition = AirCapabilities_FPANE_FREObjectToInt(argv[3]);
+        NSInteger width = AirCapabilities_FPANE_FREObjectToInt(argv[4]);
+        NSInteger height = AirCapabilities_FPANE_FREObjectToInt(argv[5]);
         // saving it to disk
         NSData *imageData= UIImageJPEGRepresentation(rewardImage,0.0);
         NSString *imagePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"/insta.igo"];
@@ -742,13 +733,13 @@ DEFINE_ANE_FUNCTION(postPictureOnInstagram) {
 DEFINE_ANE_FUNCTION(getCurrentMem) {
     
     double bytes = [AirCapabilities currentMemUse];
-    return FPANE_DoubleToFREObject(bytes);
+    return AirCapabilities_FPANE_DoubleToFREObject(bytes);
 }
 
 DEFINE_ANE_FUNCTION(getCurrentVirtualMem) {
     
     double bytes = [AirCapabilities currentVirtualMemUse];
-    return FPANE_DoubleToFREObject(bytes);
+    return AirCapabilities_FPANE_DoubleToFREObject(bytes);
 }
 
 DEFINE_ANE_FUNCTION(canRequestReview) {
@@ -758,7 +749,7 @@ DEFINE_ANE_FUNCTION(canRequestReview) {
     if ([NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10,3,0}] && [SKStoreReviewController class])
         value = YES;
 
-    return FPANE_BOOLToFREObject(value);
+    return AirCapabilities_FPANE_BOOLToFREObject(value);
 }
 
 DEFINE_ANE_FUNCTION(requestReview) {
