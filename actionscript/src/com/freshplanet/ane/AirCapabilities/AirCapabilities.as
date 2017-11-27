@@ -293,6 +293,9 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
          */
         public function getCurrentVirtualMem():Number {
 
+			if(!isSupported)
+				return -1;
+
             if (Capabilities.manufacturer.indexOf("iOS") == -1)
                 return -1;
 
