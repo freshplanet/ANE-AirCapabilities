@@ -18,6 +18,7 @@
 #import <UIKit/UIApplication.h>
 #import <Twitter/TWTweetComposeViewController.h>
 #import <StoreKit/SKStoreReviewController.h>
+#import "HapticFeedback.h"
 
 @implementation AirCapabilities
 
@@ -758,6 +759,12 @@ DEFINE_ANE_FUNCTION(requestReview) {
     return nil;
 }
 
+DEFINE_ANE_FUNCTION(generateHapticFeedback) {
+    NSInteger feedbackType = AirCapabilities_FPANE_FREObjectToInt(argv[0]);
+    [HapticFeedback generateFeedback:feedbackType];
+    return nil;
+}
+
 void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) {
     
     AirCapabilities* controller = [[AirCapabilities alloc] initWithContext:ctx];
@@ -788,7 +795,8 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
         MAP_FUNCTION(getCurrentMem, NULL),
         MAP_FUNCTION(getCurrentVirtualMem, NULL),
         MAP_FUNCTION(canRequestReview, NULL),
-        MAP_FUNCTION(requestReview, NULL)
+        MAP_FUNCTION(requestReview, NULL),
+        MAP_FUNCTION(generateHapticFeedback, NULL)
     };
     
     *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);
