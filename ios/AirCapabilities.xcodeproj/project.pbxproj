@@ -11,6 +11,7 @@
 		16EFD4751E3A903300ED8CEE /* AirCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4741E3A903300ED8CEE /* AirCapabilities.m */; };
 		16EFD4761E3A903300ED8CEE /* AirCapabilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16EFD4731E3A903300ED8CEE /* AirCapabilities.h */; };
 		B13A59C89D0BB34E3375A09E /* libPods-AirCapabilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */; };
+		FAC6F6B321149A46000F180B /* HapticFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC6F6B121149A46000F180B /* HapticFeedback.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +37,8 @@
 		42A4A57CCDEA75AEDD32FBFE /* Pods-AirCapabilities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCapabilities.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities.release.xcconfig"; sourceTree = "<group>"; };
 		85BFE1EB43E3A5002171425B /* Pods-AirCapabilities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCapabilities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities.debug.xcconfig"; sourceTree = "<group>"; };
 		B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirCapabilities.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAC6F6B121149A46000F180B /* HapticFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HapticFeedback.m; sourceTree = "<group>"; };
+		FAC6F6B221149A46000F180B /* HapticFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HapticFeedback.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,8 @@
 				160643521E3A90FA0076660A /* FlashRuntimeExtensions.h */,
 				160643531E3A90FA0076660A /* FPANEUtils.h */,
 				160643541E3A90FA0076660A /* FPANEUtils.m */,
+				FAC6F6B221149A46000F180B /* HapticFeedback.h */,
+				FAC6F6B121149A46000F180B /* HapticFeedback.m */,
 				16EFD4721E3A903300ED8CEE /* AirCapabilities */,
 				16EFD4711E3A903300ED8CEE /* Products */,
 				AD72F1D5F70DEF51F6A1685D /* Pods */,
@@ -191,6 +196,7 @@
 			files = (
 				160643551E3A90FA0076660A /* FPANEUtils.m in Sources */,
 				16EFD4751E3A903300ED8CEE /* AirCapabilities.m in Sources */,
+				FAC6F6B321149A46000F180B /* HapticFeedback.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
