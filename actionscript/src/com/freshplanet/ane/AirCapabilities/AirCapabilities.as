@@ -330,6 +330,19 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 
 			_extContext.call("requestReview");
 		}
+		/**
+		 * Generate haptic feedback - iOS only
+		 */
+		public function generateHapticFeedback(feedbackType:AirCapabilitiesHapticFeedbackType):void {
+
+			if (Capabilities.manufacturer.indexOf("iOS") < 0)
+				return;
+
+			if(!feedbackType)
+				return
+
+			_extContext.call("generateHapticFeedback", feedbackType.value);
+		}
 
 		// --------------------------------------------------------------------------------------//
 		//																						 //
