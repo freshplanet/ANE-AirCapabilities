@@ -344,6 +344,13 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			_extContext.call("generateHapticFeedback", feedbackType.value);
 		}
 
+		public function getNativeScale():Number 
+		{
+			if (Capabilities.manufacturer.indexOf("iOS") < 0)
+				return 1;
+			return _extContext.call("getNativeScale");
+		}
+
 		// --------------------------------------------------------------------------------------//
 		//																						 //
 		// 									 	PRIVATE API										 //

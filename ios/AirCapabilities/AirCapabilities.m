@@ -765,6 +765,11 @@ DEFINE_ANE_FUNCTION(generateHapticFeedback) {
     return nil;
 }
 
+DEFINE_ANE_FUNCTION (getNativeScale) {
+    NSNumber *scale = [NSNumber numberWithFloat:[[UIScreen mainScreen] nativeScale]];
+    return AirCapabilities_FPANE_DoubleToFREObject([scale doubleValue]);
+}
+
 void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) {
     
     AirCapabilities* controller = [[AirCapabilities alloc] initWithContext:ctx];
@@ -796,7 +801,8 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
         MAP_FUNCTION(getCurrentVirtualMem, NULL),
         MAP_FUNCTION(canRequestReview, NULL),
         MAP_FUNCTION(requestReview, NULL),
-        MAP_FUNCTION(generateHapticFeedback, NULL)
+        MAP_FUNCTION(generateHapticFeedback, NULL),
+        MAP_FUNCTION(getNativeScale, NULL)
     };
     
     *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);
