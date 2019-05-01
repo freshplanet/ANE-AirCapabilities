@@ -348,7 +348,7 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 		{
 			if (Capabilities.manufacturer.indexOf("iOS") < 0)
 				return 1;
-			return _extContext.call("getNativeScale");
+			return _extContext.call("getNativeScale") as Number;
 		}
 
 		// --------------------------------------------------------------------------------------//
