@@ -351,6 +351,14 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			return _extContext.call("getNativeScale") as Number;
 		}
 
+		public function openAdSettings():void
+		{
+			if (Capabilities.manufacturer.indexOf("Android") < 0)
+				return;
+
+			_extContext.call("openAdSettings");
+		}
+
 		// --------------------------------------------------------------------------------------//
 		//																						 //
 		// 									 	PRIVATE API										 //

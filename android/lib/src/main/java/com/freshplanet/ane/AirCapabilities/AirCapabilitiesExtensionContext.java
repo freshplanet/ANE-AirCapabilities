@@ -30,6 +30,7 @@ import com.freshplanet.ane.AirCapabilities.functions.HasInstagramFunction;
 import com.freshplanet.ane.AirCapabilities.functions.HasSMSFunction;
 import com.freshplanet.ane.AirCapabilities.functions.HasTwitterFunction;
 import com.freshplanet.ane.AirCapabilities.functions.LogFunction;
+import com.freshplanet.ane.AirCapabilities.functions.OpenAdSettingsFunction;
 import com.freshplanet.ane.AirCapabilities.functions.OpenURLFunction;
 import com.freshplanet.ane.AirCapabilities.functions.PostPictureOnInstagramFunction;
 import com.freshplanet.ane.AirCapabilities.functions.PostPictureOnTwitterFunction;
@@ -90,6 +91,8 @@ public class AirCapabilitiesExtensionContext extends FREContext {
 		functionMap.put("hasInstagramEnabled", new HasInstagramFunction());
         functionMap.put("postPictureOnInstagram", new PostPictureOnInstagramFunction());
         functionMap.put("getCurrentMem", new GetCurrentMemFunction());
+        functionMap.put("openAdSettings", new OpenAdSettingsFunction());
+
 		return functionMap;	
 	}
 
