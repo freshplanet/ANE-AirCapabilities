@@ -359,6 +359,20 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			_extContext.call("openAdSettings");
 		}
 
+		public function getTopInset():Number
+		{
+			if (Capabilities.manufacturer.indexOf("iOS") < 0)
+				return 0;
+			return _extContext.call("getTopInset") as Number;
+		}
+
+		public function getBottomInset():Number
+		{
+			if (Capabilities.manufacturer.indexOf("iOS") < 0)
+				return 0;
+			return _extContext.call("getBottomInset") as Number;
+		}
+
 		// --------------------------------------------------------------------------------------//
 		//																						 //
 		// 									 	PRIVATE API										 //

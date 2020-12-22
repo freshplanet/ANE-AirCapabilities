@@ -770,6 +770,26 @@ DEFINE_ANE_FUNCTION (getNativeScale) {
     return AirCapabilities_FPANE_DoubleToFREObject([scale doubleValue]);
 }
 
+DEFINE_ANE_FUNCTION (getBottomInset) {
+    CGFloat bottomPadding = 0.0f;
+    if (@available(iOS 11.0, *)) {
+       UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        bottomPadding = window.safeAreaInsets.bottom;
+    }
+    NSNumber *value = [NSNumber numberWithFloat:bottomPadding];
+    return AirCapabilities_FPANE_DoubleToFREObject([value doubleValue]);
+}
+
+DEFINE_ANE_FUNCTION (getTopInset) {
+    CGFloat topPadding = 0.0f;
+    if (@available(iOS 11.0, *)) {
+       UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        topPadding = window.safeAreaInsets.top;
+    }
+    NSNumber *value = [NSNumber numberWithFloat:topPadding];
+    return AirCapabilities_FPANE_DoubleToFREObject([value doubleValue]);
+}
+
 void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) {
     
     AirCapabilities* controller = [[AirCapabilities alloc] initWithContext:ctx];
@@ -802,7 +822,9 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
         MAP_FUNCTION(canRequestReview, NULL),
         MAP_FUNCTION(requestReview, NULL),
         MAP_FUNCTION(generateHapticFeedback, NULL),
-        MAP_FUNCTION(getNativeScale, NULL)
+        MAP_FUNCTION(getNativeScale, NULL),
+        MAP_FUNCTION(getBottomInset, NULL),
+        MAP_FUNCTION(getTopInset, NULL)
     };
     
     *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);
