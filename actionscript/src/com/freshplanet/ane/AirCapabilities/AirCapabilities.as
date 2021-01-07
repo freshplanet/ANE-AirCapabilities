@@ -375,7 +375,7 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 
 		public function get iOSAppOnMac():Boolean
 		{
-			if(Capabilities.os.toLowerCase().indexOf("mac os") < 0 && Capabilities.manufacturer.indexOf("iOS") < 0)
+			if(Capabilities.manufacturer.indexOf("iOS") < 0)
 				return false;
 
 			return _extContext.call("iOSAppOnMac") as Boolean;
