@@ -373,6 +373,14 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			return _extContext.call("getBottomInset") as Number;
 		}
 
+		public function get iOSAppOnMac():Boolean
+		{
+			if(Capabilities.os.toLowerCase().indexOf("mac os") < 0 && Capabilities.manufacturer.indexOf("iOS") < 0)
+				return false;
+
+			return _extContext.call("iOSAppOnMac") as Boolean;
+		}
+
 		// --------------------------------------------------------------------------------------//
 		//																						 //
 		// 									 	PRIVATE API										 //

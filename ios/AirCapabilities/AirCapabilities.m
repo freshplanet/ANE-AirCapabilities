@@ -790,6 +790,15 @@ DEFINE_ANE_FUNCTION (getTopInset) {
     return AirCapabilities_FPANE_DoubleToFREObject([value doubleValue]);
 }
 
+DEFINE_ANE_FUNCTION (iOSAppOnMac) {
+    if (@available(iOS 14.0, *)) {
+        return AirCapabilities_FPANE_BOOLToFREObject([[NSProcessInfo processInfo] isiOSAppOnMac]);
+    } else {
+        // Fallback on earlier versions
+        return AirCapabilities_FPANE_BOOLToFREObject(NO);
+    }
+}
+
 void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) {
     
     AirCapabilities* controller = [[AirCapabilities alloc] initWithContext:ctx];
@@ -824,7 +833,8 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
         MAP_FUNCTION(generateHapticFeedback, NULL),
         MAP_FUNCTION(getNativeScale, NULL),
         MAP_FUNCTION(getBottomInset, NULL),
-        MAP_FUNCTION(getTopInset, NULL)
+        MAP_FUNCTION(getTopInset, NULL),
+        MAP_FUNCTION(iOSAppOnMac, NULL)
     };
     
     *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);
