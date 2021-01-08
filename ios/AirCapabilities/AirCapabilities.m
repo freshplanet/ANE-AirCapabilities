@@ -799,6 +799,20 @@ DEFINE_ANE_FUNCTION (iOSAppOnMac) {
     }
 }
 
+DEFINE_ANE_FUNCTION (switchToLandscape) {
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    [UIViewController attemptRotationToDeviceOrientation];
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION (switchToPortrait) {
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    [UIViewController attemptRotationToDeviceOrientation];
+    return nil;
+}
+
 void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) {
     
     AirCapabilities* controller = [[AirCapabilities alloc] initWithContext:ctx];
@@ -834,7 +848,9 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
         MAP_FUNCTION(getNativeScale, NULL),
         MAP_FUNCTION(getBottomInset, NULL),
         MAP_FUNCTION(getTopInset, NULL),
-        MAP_FUNCTION(iOSAppOnMac, NULL)
+        MAP_FUNCTION(iOSAppOnMac, NULL),
+        MAP_FUNCTION(switchToLandscape, NULL),
+        MAP_FUNCTION(switchToPortrait, NULL)
     };
     
     *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);

@@ -381,6 +381,22 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			return _extContext.call("iOSAppOnMac") as Boolean;
 		}
 
+		public function switchToLandscape():void
+		{
+			if(Capabilities.manufacturer.indexOf("iOS") < 0)
+				return;
+
+			_extContext.call("switchToLandscape");
+		}
+
+		public function switchToPortrait():void
+		{
+			if(Capabilities.manufacturer.indexOf("iOS") < 0)
+				return;
+
+			_extContext.call("switchToPortrait");
+		}
+
 		// --------------------------------------------------------------------------------------//
 		//																						 //
 		// 									 	PRIVATE API										 //
