@@ -397,6 +397,28 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			_extContext.call("switchToPortrait");
 		}
 
+		/**
+		 * MacOS only!
+		 */
+		public function forceFullscreen():void
+		{
+			if(Capabilities.os.indexOf("Mac OS") < 0)
+				return;
+
+			_extContext.call("forceFullscreen");
+		}
+
+		/**
+		 * MacOS only!
+		 */
+		public function exitFullscreen():void
+		{
+			if(Capabilities.os.indexOf("Mac OS") < 0)
+				return;
+
+			_extContext.call("exitFullscreen");
+		}
+
 		// --------------------------------------------------------------------------------------//
 		//																						 //
 		// 									 	PRIVATE API										 //
