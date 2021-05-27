@@ -13,16 +13,23 @@
  * limitations under the License.
  */
 #import <Foundation/Foundation.h>
-#import <MessageUI/MFMessageComposeViewController.h>
-#import <StoreKit/StoreKit.h>
+#if TARGET_OS_IPHONE
+    #import <MessageUI/MFMessageComposeViewController.h>
+    #import <StoreKit/StoreKit.h>
+#endif
 #import "FPANEUtils.h"
 
+#if TARGET_OS_IPHONE
 @interface AirCapabilities : NSObject<MFMessageComposeViewControllerDelegate, SKStoreProductViewControllerDelegate> {
     FREContext _context;
     NSURL* _iTunesURL;
-    
 }
-
+#else
+@interface AirCapabilities : NSObject {
+    FREContext _context;
+    NSURL* _iTunesURL;
+}
+#endif
 @end
 
 void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet);

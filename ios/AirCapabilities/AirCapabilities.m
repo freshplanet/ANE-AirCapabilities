@@ -13,12 +13,18 @@
  * limitations under the License.
  */
 #import "AirCapabilities.h"
-#import <mach/mach.h>
-#import <sys/utsname.h>
-#import <UIKit/UIApplication.h>
-#import <Twitter/TWTweetComposeViewController.h>
-#import <StoreKit/SKStoreReviewController.h>
-#import "HapticFeedback.h"
+#if TARGET_OS_IPHONE
+    #import <mach/mach.h>
+    #import <sys/utsname.h>
+    #import <UIKit/UIApplication.h>
+    #import <Twitter/TWTweetComposeViewController.h>
+    #import <StoreKit/SKStoreReviewController.h>
+    #import "HapticFeedback.h"
+#else
+    #import <AppKit/AppKit.h>
+#endif
+
+
 
 @implementation AirCapabilities
 
@@ -30,10 +36,12 @@ BOOL doLogging = NO;
         
         _context = extensionContext;
         
+#if TARGET_OS_IPHONE
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleMemoryWarning:)
                                                      name:UIApplicationDidReceiveMemoryWarningNotification
                                                    object:nil];
+#endif
     }
     
     return self;
@@ -50,7 +58,7 @@ BOOL doLogging = NO;
 - (void) sendEvent:(NSString*)code level:(NSString*)level {
     FREDispatchStatusEventAsync(_context, (const uint8_t*)[code UTF8String], (const uint8_t*)[level UTF8String]);
 }
-
+#if TARGET_OS_IPHONE
 - (void) messageComposeViewController:(MFMessageComposeViewController*)controller didFinishWithResult:(MessageComposeResult)result {
     
     [self sendEvent:@"DISMISS" level:@"OK"];
@@ -131,6 +139,7 @@ BOOL doLogging = NO;
 
 }
 
+
 - (void) handleMemoryWarning:(NSNotification*)notification {
     
     NSString* memUse = [NSString stringWithFormat:@"%f", [AirCapabilities currentMemUse]];
@@ -156,7 +165,7 @@ BOOL doLogging = NO;
    
     return vm_page_size * vmStats.free_count;
 }
-
+#endif
 @end
 
 AirCapabilities* GetAirCapabilitiesContextNativeData(FREContext context) {
@@ -168,12 +177,17 @@ AirCapabilities* GetAirCapabilitiesContextNativeData(FREContext context) {
 
 DEFINE_ANE_FUNCTION(hasSMS) {
     
+    #if TARGET_OS_IPHONE
     BOOL value = [MFMessageComposeViewController canSendText];
     return AirCapabilities_FPANE_BOOLToFREObject(value);
+    #endif
+    
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(hasTwitter) {
     
+#if TARGET_OS_IPHONE
     BOOL value = [TWTweetComposeViewController canSendTweet];
     
     if (!value) {
@@ -190,10 +204,14 @@ DEFINE_ANE_FUNCTION(hasTwitter) {
     }
     
     return AirCapabilities_FPANE_BOOLToFREObject(value);
+    
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(sendWithSms) {
     
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -220,11 +238,13 @@ DEFINE_ANE_FUNCTION(sendWithSms) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to send SMS : " stringByAppendingString:exception.reason]];
     }
+#endif
     return nil;
 }
 
 DEFINE_ANE_FUNCTION(sendWithTwitter) {
     
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -285,12 +305,14 @@ DEFINE_ANE_FUNCTION(sendWithTwitter) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured send Twitter message : " stringByAppendingString:exception.reason]];
     }
+#endif
     
     return nil;
 }
 
 DEFINE_ANE_FUNCTION(redirectToRating) {
     
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -314,27 +336,34 @@ DEFINE_ANE_FUNCTION(redirectToRating) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to redirect to rating : " stringByAppendingString:exception.reason]];
     }
+    
+#endif
     return nil;
 }
 
 
 DEFINE_ANE_FUNCTION(getDeviceModel) {
-    
+#if TARGET_OS_IPHONE
     NSString* model = [[UIDevice currentDevice] model];
     FREObject retStr = AirCapabilities_FPANE_NSStringToFREObject(model);
 
     return retStr;
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(getMachineName) {
-    
+#if TARGET_OS_IPHONE
 	struct utsname systemInfo;
 	uname(&systemInfo);
 	return AirCapabilities_FPANE_NSStringToFREObject([NSString stringWithUTF8String:systemInfo.machine]);
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(processReferralLink) {
     
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -348,11 +377,13 @@ DEFINE_ANE_FUNCTION(processReferralLink) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to process referral link : " stringByAppendingString:exception.reason]];
     }
+#endif
     return NULL;
 }
 
 
 DEFINE_ANE_FUNCTION(redirectToPageId) {
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -371,11 +402,12 @@ DEFINE_ANE_FUNCTION(redirectToPageId) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to redirect to page id : " stringByAppendingString:exception.reason]];
     }
+#endif
     return NULL;
 }
 
 DEFINE_ANE_FUNCTION(redirectToTwitterAccount) {
-    
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -394,20 +426,28 @@ DEFINE_ANE_FUNCTION(redirectToTwitterAccount) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to redirect Twitter account : " stringByAppendingString:exception.reason]];
     }
+    
+#endif
     return NULL;
 }
 
 DEFINE_ANE_FUNCTION(canPostPictureOnTwitter) {
+#if TARGET_OS_IPHONE
     return AirCapabilities_FPANE_BOOLToFREObject([TWTweetComposeViewController canSendTweet]);
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(getOSVersion) {
-    
+#if TARGET_OS_IPHONE
     NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
     return AirCapabilities_FPANE_NSStringToFREObject(systemVersion);
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(postPictureOnTwitter) {
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -487,11 +527,12 @@ DEFINE_ANE_FUNCTION(postPictureOnTwitter) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to post picture on Twitter : " stringByAppendingString:exception.reason]];
     }
+#endif
     return nil;
 }
 
 DEFINE_ANE_FUNCTION(openExternalApplication) {
-    
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -528,10 +569,12 @@ DEFINE_ANE_FUNCTION(openExternalApplication) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to open external application : " stringByAppendingString:exception.reason]];
     }
+#endif
     return nil;
 }
 
 DEFINE_ANE_FUNCTION(AirCapabilitiesCanOpenURL) {
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -547,11 +590,12 @@ DEFINE_ANE_FUNCTION(AirCapabilitiesCanOpenURL) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to check can open URL : " stringByAppendingString:exception.reason]];
     }
-    
+#endif
     return nil;
 }
 
 DEFINE_ANE_FUNCTION(AirCapabilitiesOpenURL) {
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -568,6 +612,7 @@ DEFINE_ANE_FUNCTION(AirCapabilitiesOpenURL) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to open URL : " stringByAppendingString:exception.reason]];
     }
+#endif
     return nil;
 }
 
@@ -629,7 +674,7 @@ DEFINE_ANE_FUNCTION(traceLog) {
 }
 
 DEFINE_ANE_FUNCTION(openModalAppStore) {
-    
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -642,17 +687,20 @@ DEFINE_ANE_FUNCTION(openModalAppStore) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to open modal AppStore : " stringByAppendingString:exception.reason]];
     }
+#endif
     return nil;
 }
 
 DEFINE_ANE_FUNCTION(hasInstagramEnabled) {
-    
+#if TARGET_OS_IPHONE
     BOOL value = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"instagram://app"]];
     return AirCapabilities_FPANE_BOOLToFREObject(value);
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(postPictureOnInstagram) {
-    
+#if TARGET_OS_IPHONE
     AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
     
     if (!controller)
@@ -728,49 +776,63 @@ DEFINE_ANE_FUNCTION(postPictureOnInstagram) {
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to post picture on Instagram : " stringByAppendingString:exception.reason]];
     }
+#endif
     return nil;
 }
 
 DEFINE_ANE_FUNCTION(getCurrentMem) {
-    
+#if TARGET_OS_IPHONE
     double bytes = [AirCapabilities currentMemUse];
     return AirCapabilities_FPANE_DoubleToFREObject(bytes);
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(getCurrentVirtualMem) {
-    
+#if TARGET_OS_IPHONE
     double bytes = [AirCapabilities currentVirtualMemUse];
     return AirCapabilities_FPANE_DoubleToFREObject(bytes);
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(canRequestReview) {
-
+#if TARGET_OS_IPHONE
     BOOL value = NO;
 
     if ([NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10,3,0}] && [SKStoreReviewController class])
         value = YES;
 
     return AirCapabilities_FPANE_BOOLToFREObject(value);
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(requestReview) {
-
+#if TARGET_OS_IPHONE
     [SKStoreReviewController requestReview];
+#endif
     return nil;
 }
 
 DEFINE_ANE_FUNCTION(generateHapticFeedback) {
+#if TARGET_OS_IPHONE
     NSInteger feedbackType = AirCapabilities_FPANE_FREObjectToInt(argv[0]);
     [HapticFeedback generateFeedback:feedbackType];
+#endif
     return nil;
 }
 
 DEFINE_ANE_FUNCTION (getNativeScale) {
+#if TARGET_OS_IPHONE
     NSNumber *scale = [NSNumber numberWithFloat:[[UIScreen mainScreen] nativeScale]];
     return AirCapabilities_FPANE_DoubleToFREObject([scale doubleValue]);
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION (getBottomInset) {
+#if TARGET_OS_IPHONE
     CGFloat bottomPadding = 0.0f;
     if (@available(iOS 11.0, *)) {
        UIWindow *window = UIApplication.sharedApplication.keyWindow;
@@ -778,9 +840,12 @@ DEFINE_ANE_FUNCTION (getBottomInset) {
     }
     NSNumber *value = [NSNumber numberWithFloat:bottomPadding];
     return AirCapabilities_FPANE_DoubleToFREObject([value doubleValue]);
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION (getTopInset) {
+#if TARGET_OS_IPHONE
     CGFloat topPadding = 0.0f;
     if (@available(iOS 11.0, *)) {
        UIWindow *window = UIApplication.sharedApplication.keyWindow;
@@ -788,6 +853,8 @@ DEFINE_ANE_FUNCTION (getTopInset) {
     }
     NSNumber *value = [NSNumber numberWithFloat:topPadding];
     return AirCapabilities_FPANE_DoubleToFREObject([value doubleValue]);
+#endif
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION (iOSAppOnMac) {
@@ -800,16 +867,39 @@ DEFINE_ANE_FUNCTION (iOSAppOnMac) {
 }
 
 DEFINE_ANE_FUNCTION (switchToLandscape) {
+#if TARGET_OS_IPHONE
     NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     [UIViewController attemptRotationToDeviceOrientation];
+#endif
     return nil;
 }
 
 DEFINE_ANE_FUNCTION (switchToPortrait) {
+#if TARGET_OS_IPHONE
     NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     [UIViewController attemptRotationToDeviceOrientation];
+#endif
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION (forceFullscreen) {
+#if TARGET_OS_OSX
+    [[[NSApplication sharedApplication] mainWindow] setCollectionBehavior: NSWindowCollectionBehaviorFullScreenPrimary];
+    
+#endif
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION (exitFullscreen) {
+#if TARGET_OS_OSX
+    if ([[[NSApplication sharedApplication] mainWindow] styleMask] & NSFullScreenWindowMask) {
+        [[[NSApplication sharedApplication] mainWindow] toggleFullScreen:nil];
+        [ [[NSApplication sharedApplication] mainWindow] orderOut:nil];
+        [ [[NSApplication sharedApplication] mainWindow] orderFrontRegardless];
+    }
+#endif
     return nil;
 }
 
@@ -850,7 +940,9 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
         MAP_FUNCTION(getTopInset, NULL),
         MAP_FUNCTION(iOSAppOnMac, NULL),
         MAP_FUNCTION(switchToLandscape, NULL),
-        MAP_FUNCTION(switchToPortrait, NULL)
+        MAP_FUNCTION(switchToPortrait, NULL),
+        MAP_FUNCTION(forceFullscreen, NULL),
+        MAP_FUNCTION(exitFullscreen, NULL)
     };
     
     *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);

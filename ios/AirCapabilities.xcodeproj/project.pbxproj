@@ -11,6 +11,13 @@
 		16EFD4751E3A903300ED8CEE /* AirCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4741E3A903300ED8CEE /* AirCapabilities.m */; };
 		16EFD4761E3A903300ED8CEE /* AirCapabilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16EFD4731E3A903300ED8CEE /* AirCapabilities.h */; };
 		B13A59C89D0BB34E3375A09E /* libPods-AirCapabilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */; };
+		FA75E781265FDC2C00AFF745 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 160643521E3A90FA0076660A /* FlashRuntimeExtensions.h */; };
+		FA75E782265FDC2C00AFF745 /* FPANEUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 160643531E3A90FA0076660A /* FPANEUtils.h */; };
+		FA75E783265FDC2C00AFF745 /* AirCapabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 16EFD4731E3A903300ED8CEE /* AirCapabilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA75E784265FDC3900AFF745 /* FPANEUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 160643541E3A90FA0076660A /* FPANEUtils.m */; };
+		FA75E785265FDC3900AFF745 /* AirCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4741E3A903300ED8CEE /* AirCapabilities.m */; };
+		FA75E788265FDC7400AFF745 /* Adobe AIR in Frameworks */ = {isa = PBXBuildFile; fileRef = FA75E786265FDC7400AFF745 /* Adobe AIR */; };
+		FA75E789265FDC7500AFF745 /* Adobe AIR_64 in Frameworks */ = {isa = PBXBuildFile; fileRef = FA75E787265FDC7400AFF745 /* Adobe AIR_64 */; };
 		FAC6F6B321149A46000F180B /* HapticFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC6F6B121149A46000F180B /* HapticFeedback.m */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +44,11 @@
 		42A4A57CCDEA75AEDD32FBFE /* Pods-AirCapabilities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCapabilities.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities.release.xcconfig"; sourceTree = "<group>"; };
 		85BFE1EB43E3A5002171425B /* Pods-AirCapabilities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCapabilities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities.debug.xcconfig"; sourceTree = "<group>"; };
 		B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirCapabilities.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA75E779265FDBE600AFF745 /* AirCapabilitiesMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AirCapabilitiesMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA75E77B265FDBE600AFF745 /* AirCapabilitiesMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirCapabilitiesMac.h; sourceTree = "<group>"; };
+		FA75E77C265FDBE600AFF745 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA75E786265FDC7400AFF745 /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "../../../SDKs/AIRSDK_33.1.1.345/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<group>"; };
+		FA75E787265FDC7400AFF745 /* Adobe AIR_64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR_64"; path = "../../../SDKs/AIRSDK_33.1.1.345/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR_64"; sourceTree = "<group>"; };
 		FAC6F6B121149A46000F180B /* HapticFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HapticFeedback.m; sourceTree = "<group>"; };
 		FAC6F6B221149A46000F180B /* HapticFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HapticFeedback.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -47,6 +59,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B13A59C89D0BB34E3375A09E /* libPods-AirCapabilities.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA75E776265FDBE600AFF745 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA75E788265FDC7400AFF745 /* Adobe AIR in Frameworks */,
+				FA75E789265FDC7500AFF745 /* Adobe AIR_64 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +83,7 @@
 				FAC6F6B221149A46000F180B /* HapticFeedback.h */,
 				FAC6F6B121149A46000F180B /* HapticFeedback.m */,
 				16EFD4721E3A903300ED8CEE /* AirCapabilities */,
+				FA75E77A265FDBE600AFF745 /* AirCapabilitiesMac */,
 				16EFD4711E3A903300ED8CEE /* Products */,
 				AD72F1D5F70DEF51F6A1685D /* Pods */,
 				D448D5D8A2798701D2A60F55 /* Frameworks */,
@@ -72,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				16EFD4701E3A903300ED8CEE /* libAirCapabilities.a */,
+				FA75E779265FDBE600AFF745 /* AirCapabilitiesMac.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,12 +120,36 @@
 		D448D5D8A2798701D2A60F55 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA75E786265FDC7400AFF745 /* Adobe AIR */,
+				FA75E787265FDC7400AFF745 /* Adobe AIR_64 */,
 				B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FA75E77A265FDBE600AFF745 /* AirCapabilitiesMac */ = {
+			isa = PBXGroup;
+			children = (
+				FA75E77B265FDBE600AFF745 /* AirCapabilitiesMac.h */,
+				FA75E77C265FDBE600AFF745 /* Info.plist */,
+			);
+			path = AirCapabilitiesMac;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FA75E774265FDBE600AFF745 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA75E783265FDC2C00AFF745 /* AirCapabilities.h in Headers */,
+				FA75E781265FDC2C00AFF745 /* FlashRuntimeExtensions.h in Headers */,
+				FA75E782265FDC2C00AFF745 /* FPANEUtils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		16EFD46F1E3A903300ED8CEE /* AirCapabilities */ = {
@@ -124,6 +171,24 @@
 			productReference = 16EFD4701E3A903300ED8CEE /* libAirCapabilities.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		FA75E778265FDBE600AFF745 /* AirCapabilitiesMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA75E780265FDBE600AFF745 /* Build configuration list for PBXNativeTarget "AirCapabilitiesMac" */;
+			buildPhases = (
+				FA75E774265FDBE600AFF745 /* Headers */,
+				FA75E775265FDBE600AFF745 /* Sources */,
+				FA75E776265FDBE600AFF745 /* Frameworks */,
+				FA75E777265FDBE600AFF745 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirCapabilitiesMac;
+			productName = AirCapabilitiesMac;
+			productReference = FA75E779265FDBE600AFF745 /* AirCapabilitiesMac.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -137,6 +202,10 @@
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
+					FA75E778265FDBE600AFF745 = {
+						CreatedOnToolsVersion = 12.5;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 16EFD46B1E3A903300ED8CEE /* Build configuration list for PBXProject "AirCapabilities" */;
@@ -144,6 +213,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 16EFD4671E3A903300ED8CEE;
@@ -152,9 +222,20 @@
 			projectRoot = "";
 			targets = (
 				16EFD46F1E3A903300ED8CEE /* AirCapabilities */,
+				FA75E778265FDBE600AFF745 /* AirCapabilitiesMac */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FA75E777265FDBE600AFF745 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		08AD9BF1519A4B532720CDC4 /* [CP] Check Pods Manifest.lock */ = {
@@ -197,6 +278,15 @@
 				160643551E3A90FA0076660A /* FPANEUtils.m in Sources */,
 				16EFD4751E3A903300ED8CEE /* AirCapabilities.m in Sources */,
 				FAC6F6B321149A46000F180B /* HapticFeedback.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA75E775265FDBE600AFF745 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA75E784265FDC3900AFF745 /* FPANEUtils.m in Sources */,
+				FA75E785265FDC3900AFF745 /* AirCapabilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +410,89 @@
 			};
 			name = Release;
 		};
+		FA75E77E265FDBE600AFF745 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXCLUDED_ARCHS = arm64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AirCapabilitiesMac/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freshplanet.AirCapabilitiesMac;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FA75E77F265FDBE600AFF745 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXCLUDED_ARCHS = arm64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AirCapabilitiesMac/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freshplanet.AirCapabilitiesMac;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -337,6 +510,15 @@
 			buildConfigurations = (
 				16EFD47A1E3A903300ED8CEE /* Debug */,
 				16EFD47B1E3A903300ED8CEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA75E780265FDBE600AFF745 /* Build configuration list for PBXNativeTarget "AirCapabilitiesMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA75E77E265FDBE600AFF745 /* Debug */,
+				FA75E77F265FDBE600AFF745 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
