@@ -858,12 +858,18 @@ DEFINE_ANE_FUNCTION (getTopInset) {
 }
 
 DEFINE_ANE_FUNCTION (iOSAppOnMac) {
+#if TARGET_OS_IPHONE
     if (@available(iOS 14.0, *)) {
         return AirCapabilities_FPANE_BOOLToFREObject([[NSProcessInfo processInfo] isiOSAppOnMac]);
-    } else {
-        // Fallback on earlier versions
-        return AirCapabilities_FPANE_BOOLToFREObject(NO);
     }
+#elif TARGET_OS_OSX
+    if (@available(macOS 11.0, *)) {
+        return AirCapabilities_FPANE_BOOLToFREObject([[NSProcessInfo processInfo] isiOSAppOnMac]);
+    }
+#endif
+    // Fallback on earlier versions
+    return AirCapabilities_FPANE_BOOLToFREObject(NO);
+    
 }
 
 DEFINE_ANE_FUNCTION (switchToLandscape) {
