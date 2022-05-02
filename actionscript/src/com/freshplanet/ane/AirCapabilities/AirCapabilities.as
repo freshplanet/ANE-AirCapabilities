@@ -398,6 +398,17 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 		}
 
 		/**
+		 * Android only!
+		 */
+		public function hasPackageInstalled(packageName:String):Boolean
+		{
+			if(Capabilities.manufacturer.indexOf("Android") < 0)
+				return false;
+
+			return _extContext.call("hasPackageInstalled", packageName);
+		}
+
+		/**
 		 * MacOS only!
 		 */
 		public function forceFullscreen():void
