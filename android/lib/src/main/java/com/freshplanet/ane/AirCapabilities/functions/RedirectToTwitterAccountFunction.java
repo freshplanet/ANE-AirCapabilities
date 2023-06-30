@@ -16,6 +16,7 @@ package com.freshplanet.ane.AirCapabilities.functions;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
@@ -42,9 +43,11 @@ public class RedirectToTwitterAccountFunction implements FREFunction {
 		if (twitterAccount != null)
 		{
 			try {
+				arg0.getActivity().getPackageManager().getPackageInfo("com.twitter.android", 0);
 				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name="+twitterAccount));
-			}catch (Exception e) {
-					intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/"+twitterAccount));
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			} catch (Exception e) {
+				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/"+twitterAccount));
 			}
 		}
 		

@@ -41,7 +41,7 @@ public class RedirectToPageIdFunction implements FREFunction {
 		{
 			try {
 				arg0.getActivity().getPackageManager().getPackageInfo("com.facebook.katana", 0);
-				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/"+pageId));
+				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/"+pageId));
 			} catch (Exception e) {
 				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"+pageId));
 			}
