@@ -47,7 +47,7 @@ public class RedirectToTwitterAccountFunction implements FREFunction {
 				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name="+twitterAccount));
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			} catch (Exception e) {
-				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/"+twitterAccount));
+				intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/"+twitterAccount));
 			}
 		}
 		
