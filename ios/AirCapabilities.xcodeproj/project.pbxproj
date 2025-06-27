@@ -10,7 +10,7 @@
 		160643551E3A90FA0076660A /* FPANEUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 160643541E3A90FA0076660A /* FPANEUtils.m */; };
 		16EFD4751E3A903300ED8CEE /* AirCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4741E3A903300ED8CEE /* AirCapabilities.m */; };
 		16EFD4761E3A903300ED8CEE /* AirCapabilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16EFD4731E3A903300ED8CEE /* AirCapabilities.h */; };
-		A2D35A0D2A4F01D000823A32 /* Adobe AIR in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D35A0A2A4F01A900823A32 /* Adobe AIR */; };
+		644BCCFA2E0EA5BA00009347 /* Adobe AIR in Frameworks */ = {isa = PBXBuildFile; fileRef = 644BCCF92E0EA5BA00009347 /* Adobe AIR */; };
 		B13A59C89D0BB34E3375A09E /* libPods-AirCapabilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */; };
 		FA75E781265FDC2C00AFF745 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 160643521E3A90FA0076660A /* FlashRuntimeExtensions.h */; };
 		FA75E782265FDC2C00AFF745 /* FPANEUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 160643531E3A90FA0076660A /* FPANEUtils.h */; };
@@ -41,6 +41,7 @@
 		16EFD4731E3A903300ED8CEE /* AirCapabilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirCapabilities.h; sourceTree = "<group>"; };
 		16EFD4741E3A903300ED8CEE /* AirCapabilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirCapabilities.m; sourceTree = "<group>"; };
 		42A4A57CCDEA75AEDD32FBFE /* Pods-AirCapabilities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCapabilities.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities.release.xcconfig"; sourceTree = "<group>"; };
+		644BCCF92E0EA5BA00009347 /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "../../../../AIRSDK_51.1.3/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<group>"; };
 		85BFE1EB43E3A5002171425B /* Pods-AirCapabilities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCapabilities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities.debug.xcconfig"; sourceTree = "<group>"; };
 		A2D35A0A2A4F01A900823A32 /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "../../../SDKs/AIRSDK_33.1.1.889/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<group>"; };
 		B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirCapabilities.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2D35A0D2A4F01D000823A32 /* Adobe AIR in Frameworks */,
+				644BCCFA2E0EA5BA00009347 /* Adobe AIR in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +122,7 @@
 			children = (
 				FA75E786265FDC7400AFF745 /* Adobe AIR */,
 				A2D35A0A2A4F01A900823A32 /* Adobe AIR */,
+				644BCCF92E0EA5BA00009347 /* Adobe AIR */,
 				FA75E787265FDC7400AFF745 /* Adobe AIR_64 */,
 				B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */,
 			);
@@ -160,7 +162,6 @@
 				16EFD46C1E3A903300ED8CEE /* Sources */,
 				16EFD46D1E3A903300ED8CEE /* Frameworks */,
 				16EFD46E1E3A903300ED8CEE /* CopyFiles */,
-				36CC867F3630EE48BB75FF20 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -244,28 +245,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AirCapabilities-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		36CC867F3630EE48BB75FF20 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
