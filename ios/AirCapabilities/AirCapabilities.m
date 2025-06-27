@@ -89,7 +89,9 @@ BOOL doLogging = NO;
 }
 
 - (void) connectionDidFinishLoading:(NSURLConnection*)connection {
-    [[UIApplication sharedApplication] openURL:_iTunesURL];
+    [[UIApplication sharedApplication] openURL:_iTunesURL options:@{} completionHandler:^(BOOL success) {
+
+    }];
 }
 
 - (void) openApplication:(NSArray*)schemes appStoreURL:(NSURL*)appStoreURL {
@@ -102,7 +104,9 @@ BOOL doLogging = NO;
         
         if (canOpenApplication) {
             
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:scheme]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:scheme] options:@{} completionHandler:^(BOOL success) {
+
+            }];
             break;
         }
     }
@@ -110,7 +114,9 @@ BOOL doLogging = NO;
     if (!canOpenApplication) {
         
         if (appStoreURL != nil)
-            [[UIApplication sharedApplication] openURL:appStoreURL];
+            [[UIApplication sharedApplication] openURL:appStoreURL options:@{} completionHandler:^(BOOL success) {
+
+            }];
     }
 }
 
@@ -133,7 +139,10 @@ BOOL doLogging = NO;
                                     if (!result) {
                                         
                                         [[UIApplication sharedApplication].delegate.window.rootViewController dismissViewControllerAnimated:YES completion:^{}];
-                                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]]];
+                                        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appStoreID]];
+                                        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+
+                                        }];
                                     }
                                 }];
 
@@ -397,7 +406,11 @@ DEFINE_ANE_FUNCTION(redirectToPageId) {
         if (![[UIApplication sharedApplication] canOpenURL:schemeUrl])
             schemeUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.facebook.com/%@", pageId]];
         
-        [[UIApplication sharedApplication] openURL:schemeUrl];
+        [[UIApplication sharedApplication] openURL:schemeUrl options:@{} completionHandler:^(BOOL success) {
+            if (!success) {
+                [controller sendLog:@"OpenUrl failed"];
+            }
+        }];
     }
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to redirect to page id : " stringByAppendingString:exception.reason]];
@@ -421,7 +434,11 @@ DEFINE_ANE_FUNCTION(redirectToTwitterAccount) {
         if (![[UIApplication sharedApplication] canOpenURL:schemeUrl])
             schemeUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.twitter.com/%@", pageId]];
         
-        [[UIApplication sharedApplication] openURL:schemeUrl];
+        [[UIApplication sharedApplication] openURL:schemeUrl options:@{} completionHandler:^(BOOL success) {
+            if (!success) {
+                [controller sendLog:@"OpenUrl failed"];
+            }
+        }];
     }
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to redirect Twitter account : " stringByAppendingString:exception.reason]];
@@ -607,7 +624,11 @@ DEFINE_ANE_FUNCTION(AirCapabilitiesOpenURL) {
         BOOL canOpenURL = url ? [[UIApplication sharedApplication] canOpenURL:url] : NO;
         
         if (canOpenURL)
-            [[UIApplication sharedApplication] openURL:url];
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+            if (!success) {
+                [controller sendLog:@"OpenUrl failed"];
+            }
+        }];
     }
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to open URL : " stringByAppendingString:exception.reason]];
