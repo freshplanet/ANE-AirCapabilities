@@ -455,7 +455,9 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 				throw new Error("singleton class, use .instance");
 
 			_extContext = ExtensionContext.createExtensionContext(EXTENSION_ID, null);
-			_extContext.addEventListener(StatusEvent.STATUS, _handleStatusEvent);
+			if (_extContext) {
+				_extContext.addEventListener(StatusEvent.STATUS, _handleStatusEvent);
+			}
 
 			if (isSupported)
 				_logger = new NativeLogger(_extContext);
