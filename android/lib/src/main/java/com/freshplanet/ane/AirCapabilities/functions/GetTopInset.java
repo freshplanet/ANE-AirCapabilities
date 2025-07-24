@@ -25,16 +25,16 @@ import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
 import com.adobe.fre.FREWrongThreadException;
 
-public class GetBottomOffsetAndroid15Function implements FREFunction {
+public class GetTopInset implements FREFunction {
 
     @Override
     public FREObject call(FREContext context, FREObject[] arg1) {
 
         WindowInsets windowinsets = context.getActivity().getWindowManager().getCurrentWindowMetrics().getWindowInsets();
 
-        Insets insetsBottom = windowinsets.getInsets(WindowInsets.Type.navigationBars());
+        Insets insets = windowinsets.getInsets(WindowInsets.Type.statusBars());
 
-        int offsetValue = insetsBottom.bottom;
+        int offsetValue = insets.top;;
 
         FREObject retValue = null;
 

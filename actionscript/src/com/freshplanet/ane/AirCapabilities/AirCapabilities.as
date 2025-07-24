@@ -422,24 +422,20 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 
 		public function getTopInset():Number
 		{
-			if (Capabilities.manufacturer.indexOf("Android") > -1) {
-				return _extContext.call("getTopOffsetAndroid15Function") as Number;
+			if (Capabilities.manufacturer.indexOf("Android") > -1 || Capabilities.manufacturer.indexOf("iOS") > -1) {
+				return _extContext.call("getTopInset") as Number;
 			}
 
-			if (Capabilities.manufacturer.indexOf("iOS") < 0)
-				return 0;
-			return _extContext.call("getTopInset") as Number;
+			return 0;
 		}
 
 		public function getBottomInset():Number
 		{
-			if (Capabilities.manufacturer.indexOf("Android") > -1) {
-				return _extContext.call("getBottomOffsetAndroid15Function") as Number;
+			if (Capabilities.manufacturer.indexOf("Android") > -1 || Capabilities.manufacturer.indexOf("iOS") > -1) {
+				return _extContext.call("getBottomInset") as Number;
 			}
 
-			if (Capabilities.manufacturer.indexOf("iOS") < 0)
-				return 0;
-			return _extContext.call("getBottomInset") as Number;
+			return 0;
 		}
 
 		// --------------------------------------------------------------------------------------//
