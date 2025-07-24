@@ -408,6 +408,21 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			return _extContext.call("hasPackageInstalled", packageName);
 		}
 
+
+		public function getTopOffsetAndroid15():Number
+		{
+			if (Capabilities.manufacturer.indexOf("Android") < 0)
+				return 0;
+			return _extContext.call("getTopOffsetAndroid15Function") as Number;
+		}
+
+		public function getBottomOffsetAndroid15():Number
+		{
+			if (Capabilities.manufacturer.indexOf("Android") < 0)
+				return 0;
+			return _extContext.call("getBottomOffsetAndroid15Function") as Number;
+		}
+
 		/**
 		 * MacOS only!
 		 */

@@ -42,6 +42,8 @@ import com.freshplanet.ane.AirCapabilities.functions.RedirectToTwitterAccountFun
 import com.freshplanet.ane.AirCapabilities.functions.SendWithSMSFunction;
 import com.freshplanet.ane.AirCapabilities.functions.SendWithTwitterFunction;
 import com.freshplanet.ane.AirCapabilities.functions.SetLoggingFunction;
+import com.freshplanet.ane.AirCapabilities.functions.GetTopOffsetAndroid15Function;
+import com.freshplanet.ane.AirCapabilities.functions.GetBottomOffsetAndroid15Function;
 
 public class AirCapabilitiesExtensionContext extends FREContext {
 
@@ -94,6 +96,8 @@ public class AirCapabilitiesExtensionContext extends FREContext {
         functionMap.put("getCurrentMem", new GetCurrentMemFunction());
         functionMap.put("openAdSettings", new OpenAdSettingsFunction());
 		functionMap.put("hasPackageInstalled", new HasPackageInstalledFunction());
+		functionMap.put("getTopOffsetAndroid15Function", new GetTopOffsetAndroid15Function());
+		functionMap.put("getBottomOffsetAndroid15Function", new GetBottomOffsetAndroid15Function());
 
 		return functionMap;	
 	}
