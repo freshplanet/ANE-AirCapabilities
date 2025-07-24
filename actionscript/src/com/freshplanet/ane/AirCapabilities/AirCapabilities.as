@@ -359,20 +359,6 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			_extContext.call("openAdSettings");
 		}
 
-		public function getTopInset():Number
-		{
-			if (Capabilities.manufacturer.indexOf("iOS") < 0)
-				return 0;
-			return _extContext.call("getTopInset") as Number;
-		}
-
-		public function getBottomInset():Number
-		{
-			if (Capabilities.manufacturer.indexOf("iOS") < 0)
-				return 0;
-			return _extContext.call("getBottomInset") as Number;
-		}
-
 		public function get iOSAppOnMac():Boolean
 		{
 			if(Capabilities.manufacturer.indexOf("iOS") < 0)
@@ -408,21 +394,6 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			return _extContext.call("hasPackageInstalled", packageName);
 		}
 
-
-		public function getTopOffsetAndroid15():Number
-		{
-			if (Capabilities.manufacturer.indexOf("Android") < 0)
-				return 0;
-			return _extContext.call("getTopOffsetAndroid15Function") as Number;
-		}
-
-		public function getBottomOffsetAndroid15():Number
-		{
-			if (Capabilities.manufacturer.indexOf("Android") < 0)
-				return 0;
-			return _extContext.call("getBottomOffsetAndroid15Function") as Number;
-		}
-
 		/**
 		 * MacOS only!
 		 */
@@ -443,6 +414,32 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 				return;
 
 			_extContext.call("exitFullscreen");
+		}
+
+		/**
+		 * IOS and Android for get offsets
+		 */
+
+		public function getTopInset():Number
+		{
+			if (Capabilities.manufacturer.indexOf("Android") > -1) {
+				return _extContext.call("getTopOffsetAndroid15Function") as Number;
+			}
+
+			if (Capabilities.manufacturer.indexOf("iOS") < 0)
+				return 0;
+			return _extContext.call("getTopInset") as Number;
+		}
+
+		public function getBottomInset():Number
+		{
+			if (Capabilities.manufacturer.indexOf("Android") > -1) {
+				return _extContext.call("getBottomOffsetAndroid15Function") as Number;
+			}
+
+			if (Capabilities.manufacturer.indexOf("iOS") < 0)
+				return 0;
+			return _extContext.call("getBottomInset") as Number;
 		}
 
 		// --------------------------------------------------------------------------------------//
