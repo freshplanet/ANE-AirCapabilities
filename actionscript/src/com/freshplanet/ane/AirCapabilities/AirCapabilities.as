@@ -359,20 +359,6 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			_extContext.call("openAdSettings");
 		}
 
-		public function getTopInset():Number
-		{
-			if (Capabilities.manufacturer.indexOf("iOS") < 0)
-				return 0;
-			return _extContext.call("getTopInset") as Number;
-		}
-
-		public function getBottomInset():Number
-		{
-			if (Capabilities.manufacturer.indexOf("iOS") < 0)
-				return 0;
-			return _extContext.call("getBottomInset") as Number;
-		}
-
 		public function get iOSAppOnMac():Boolean
 		{
 			if(Capabilities.manufacturer.indexOf("iOS") < 0)
@@ -428,6 +414,28 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 				return;
 
 			_extContext.call("exitFullscreen");
+		}
+
+		/**
+		 * IOS and Android for get offsets
+		 */
+
+		public function getTopInset():Number
+		{
+			if (Capabilities.manufacturer.indexOf("Android") > -1 || Capabilities.manufacturer.indexOf("iOS") > -1) {
+				return _extContext.call("getTopInset") as Number;
+			}
+
+			return 0;
+		}
+
+		public function getBottomInset():Number
+		{
+			if (Capabilities.manufacturer.indexOf("Android") > -1 || Capabilities.manufacturer.indexOf("iOS") > -1) {
+				return _extContext.call("getBottomInset") as Number;
+			}
+
+			return 0;
 		}
 
 		// --------------------------------------------------------------------------------------//
