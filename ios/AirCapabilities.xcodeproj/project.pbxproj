@@ -43,13 +43,10 @@
 		42A4A57CCDEA75AEDD32FBFE /* Pods-AirCapabilities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCapabilities.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities.release.xcconfig"; sourceTree = "<group>"; };
 		644BCCF92E0EA5BA00009347 /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "../../../../AIRSDK_51.1.3/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<group>"; };
 		85BFE1EB43E3A5002171425B /* Pods-AirCapabilities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirCapabilities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirCapabilities/Pods-AirCapabilities.debug.xcconfig"; sourceTree = "<group>"; };
-		A2D35A0A2A4F01A900823A32 /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "../../../AIRSDK_51.1.3/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<group>"; };
 		B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirCapabilities.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA75E779265FDBE600AFF745 /* AirCapabilitiesMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AirCapabilitiesMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA75E77B265FDBE600AFF745 /* AirCapabilitiesMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirCapabilitiesMac.h; sourceTree = "<group>"; };
 		FA75E77C265FDBE600AFF745 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA75E786265FDC7400AFF745 /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "../../../AIRSDK_51.1.3/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<group>"; };
-		FA75E787265FDC7400AFF745 /* Adobe AIR_64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR_64"; path = "../../../AIRSDK_51.1.3/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR_64"; sourceTree = "<group>"; };
 		FAC6F6B121149A46000F180B /* HapticFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HapticFeedback.m; sourceTree = "<group>"; };
 		FAC6F6B221149A46000F180B /* HapticFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HapticFeedback.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,10 +117,7 @@
 		D448D5D8A2798701D2A60F55 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FA75E786265FDC7400AFF745 /* Adobe AIR */,
-				A2D35A0A2A4F01A900823A32 /* Adobe AIR */,
 				644BCCF92E0EA5BA00009347 /* Adobe AIR */,
-				FA75E787265FDC7400AFF745 /* Adobe AIR_64 */,
 				B45D561EB00FE5F86DE67820 /* libPods-AirCapabilities.a */,
 			);
 			name = Frameworks;
