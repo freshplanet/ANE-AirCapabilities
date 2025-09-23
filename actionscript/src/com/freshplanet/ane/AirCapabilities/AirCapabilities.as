@@ -15,13 +15,15 @@
 
 package com.freshplanet.ane.AirCapabilities {
 
-import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesLowMemoryEvent;
-import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
+	import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesLowMemoryEvent;
+	import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
+	import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesFileLoadEvent;
 	import flash.display.BitmapData;
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 	import flash.system.Capabilities;
+	import flash.utils.ByteArray;
 
 	public class AirCapabilities extends EventDispatcher {
 
@@ -438,6 +440,22 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
 			return 0;
 		}
 
+		public function loadPackagedFile(fileName:String):ByteArray {
+			return _extContext.call("loadPackagedFile", fileName) as ByteArray;
+		}
+
+		public function loadPackagedFileAsync(fileName:String):void {
+			_extContext.call("loadPackagedFileAsync", fileName);
+		}
+
+		public function getLoadedFileData(fileName:String):ByteArray {
+			return _extContext.call("getLoadedFileData", fileName) as ByteArray;
+		}
+
+		public function deleteLoadedFileData(fileName:String):ByteArray {
+			return _extContext.call("deleteLoadedFileData", fileName) as ByteArray;
+		}
+
 		// --------------------------------------------------------------------------------------//
 		//																						 //
 		// 									 	PRIVATE API										 //
@@ -484,6 +502,9 @@ import com.freshplanet.ane.AirCapabilities.events.AirCapabilitiesOpenURLEvent;
             else if (event.code == AirCapabilitiesLowMemoryEvent.LOW_MEMORY_WARNING) {
 	            var memory:Number = Number(event.level);
 	            this.dispatchEvent(new AirCapabilitiesLowMemoryEvent(event.code, memory));
+            } else if (event.code == AirCapabilitiesFileLoadEvent.FILE_LOAD_FAILED
+                    || event.code == AirCapabilitiesFileLoadEvent.FILE_LOAD_SUCCESS) {
+                this.dispatchEvent(new AirCapabilitiesFileLoadEvent(event.code, event.level));
             }
             else
                 this.dispatchEvent(event);

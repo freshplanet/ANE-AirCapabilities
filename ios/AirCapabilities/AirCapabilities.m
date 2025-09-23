@@ -35,6 +35,7 @@ BOOL doLogging = NO;
     if (self = [super init]) {
         
         _context = extensionContext;
+        loadedFiles = [[NSMutableDictionary alloc] init];
         
 #if TARGET_OS_IPHONE
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -930,6 +931,102 @@ DEFINE_ANE_FUNCTION (exitFullscreen) {
     return nil;
 }
 
+DEFINE_ANE_FUNCTION(loadPackagedFile) {
+    AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
+    
+    if (!controller)
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
+    
+    @try {
+        NSString *urlString = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
+        [controller sendLog:urlString];
+
+        NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+        NSString *filePath = [resourcePath stringByAppendingPathComponent:urlString];
+        NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+
+        if (fileData) {
+            return AirCapabilities_FPANE_NSDataToFREByteArray(fileData);
+        }
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying load file: " stringByAppendingString:exception.reason]];
+    }
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(loadPackagedFileAsync) {
+    AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
+    
+    if (!controller)
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
+    
+    @try {
+        NSString *urlString = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
+        
+        if (controller->loadedFiles[urlString]) {
+            [controller sendEvent:@"fileLoadSuccess" level:urlString];
+            return nil;
+        }
+        
+        dispatch_queue_t readFileQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(readFileQueue, ^{
+            NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+            NSString *filePath = [resourcePath stringByAppendingPathComponent:urlString];
+            NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+            
+            if (!fileData) {
+                [controller sendEvent:@"fileLoadFailed" level:urlString];
+                return;
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                controller->loadedFiles[urlString] = fileData;
+                [controller sendEvent:@"fileLoadSuccess" level:urlString];
+            });
+        });
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying load file: " stringByAppendingString:exception.reason]];
+    }
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(getLoadedFileData) {
+    AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
+    
+    if (!controller)
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
+    
+    @try {
+        NSString *urlString = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
+        NSData* fileData = controller->loadedFiles[urlString];
+        if (fileData) {
+            return AirCapabilities_FPANE_NSDataToFREByteArray(fileData);
+        }
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying get loaded file: " stringByAppendingString:exception.reason]];
+    }
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(deleteLoadedFileData) {
+    AirCapabilities* controller = GetAirCapabilitiesContextNativeData(context);
+    
+    if (!controller)
+        return AirCapabilities_FPANE_CreateError(@"context's AirCapabilities is null", 0);
+    
+    @try {
+        NSString *urlString = AirCapabilities_FPANE_FREObjectToNSString(argv[0]);
+        [controller->loadedFiles removeObjectForKey:urlString];
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying get loaded file: " stringByAppendingString:exception.reason]];
+    }
+    return nil;
+}
+
 void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) {
     
     AirCapabilities* controller = [[AirCapabilities alloc] initWithContext:ctx];
@@ -969,7 +1066,11 @@ void AirCapabilitiesContextInitializer(void* extData, const uint8_t* ctxType, FR
         MAP_FUNCTION(switchToLandscape, NULL),
         MAP_FUNCTION(switchToPortrait, NULL),
         MAP_FUNCTION(forceFullscreen, NULL),
-        MAP_FUNCTION(exitFullscreen, NULL)
+        MAP_FUNCTION(exitFullscreen, NULL),
+        MAP_FUNCTION(loadPackagedFile, NULL),
+        MAP_FUNCTION(loadPackagedFileAsync, NULL),
+        MAP_FUNCTION(getLoadedFileData, NULL),
+        MAP_FUNCTION(deleteLoadedFileData, NULL)
     };
     
     *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);

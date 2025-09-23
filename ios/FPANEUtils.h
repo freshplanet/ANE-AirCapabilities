@@ -36,5 +36,6 @@ FREObject AirCapabilities_FPANE_BOOLToFREObject(BOOL boolean);
 FREObject AirCapabilities_FPANE_IntToFREObject(NSInteger i);
 FREObject AirCapabilities_FPANE_DoubleToFREObject(double d);
 FREObject AirCapabilities_FPANE_NSStringToFREObject(NSString *string);
+FREObject AirCapabilities_FPANE_NSDataToFREByteArray(NSData *data);
 
 FREObject AirCapabilities_FPANE_CreateError( NSString* error, NSInteger* id );
