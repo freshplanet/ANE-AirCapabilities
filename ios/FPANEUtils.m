@@ -146,6 +146,20 @@ FREObject AirCapabilities_FPANE_NSStringToFREObject(NSString *string)
     return result;
 }
 
+FREObject AirCapabilities_FPANE_NSDataToFREByteArray(NSData *data) {
+    FREObject result = NULL;
+    
+    FRENewObject((const uint8_t*)"flash.utils.ByteArray", 0, NULL, &result, NULL);
+    FRESetObjectProperty(result, (const uint8_t*)"length", AirCapabilities_FPANE_IntToFREObject([data length]), NULL);
+    
+    FREByteArray output;
+    FREAcquireByteArray(result, &output);
+    memcpy(output.bytes, [data bytes], [data length]);
+    FREReleaseByteArray(result);
+    
+    return result;
+}
+
 FREObject AirCapabilities_FPANE_CreateError( NSString* error, NSInteger* id )
 {
     FREObject ret;

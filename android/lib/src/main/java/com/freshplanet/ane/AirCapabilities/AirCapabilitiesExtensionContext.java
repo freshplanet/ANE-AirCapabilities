@@ -21,15 +21,18 @@ import android.util.Log;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
-import com.adobe.fre.FREObject;
 import com.freshplanet.ane.AirCapabilities.functions.CanOpenURLFunction;
+import com.freshplanet.ane.AirCapabilities.functions.DeleteLoadedFileData;
 import com.freshplanet.ane.AirCapabilities.functions.GetCurrentMemFunction;
 import com.freshplanet.ane.AirCapabilities.functions.GetDeviceModelFunction;
+import com.freshplanet.ane.AirCapabilities.functions.GetLoadedFileData;
 import com.freshplanet.ane.AirCapabilities.functions.GetOSVersionFunction;
 import com.freshplanet.ane.AirCapabilities.functions.HasInstagramFunction;
 import com.freshplanet.ane.AirCapabilities.functions.HasPackageInstalledFunction;
 import com.freshplanet.ane.AirCapabilities.functions.HasSMSFunction;
 import com.freshplanet.ane.AirCapabilities.functions.HasTwitterFunction;
+import com.freshplanet.ane.AirCapabilities.functions.LoadPackagedFile;
+import com.freshplanet.ane.AirCapabilities.functions.LoadPackagedFileAsync;
 import com.freshplanet.ane.AirCapabilities.functions.LogFunction;
 import com.freshplanet.ane.AirCapabilities.functions.OpenAdSettingsFunction;
 import com.freshplanet.ane.AirCapabilities.functions.OpenURLFunction;
@@ -48,9 +51,11 @@ import com.freshplanet.ane.AirCapabilities.functions.GetBottomInset;
 public class AirCapabilitiesExtensionContext extends FREContext {
 
 	public static final String TAG = "InAppExtensionContext";
+	public HashMap<String, byte[]> loadedFiles;
 
 	public AirCapabilitiesExtensionContext()
 	{
+		loadedFiles = new HashMap<String, byte[]>();
 		if(AirCapabilitiesExtension.doLogging)
 			Log.d(TAG, "AirCapabilitiesExtensionContext.C2DMExtensionContext");
 	}
@@ -58,6 +63,7 @@ public class AirCapabilitiesExtensionContext extends FREContext {
 	@Override
 	public void dispose() 
 	{
+		loadedFiles = null;
 		if(AirCapabilitiesExtension.doLogging)
 			Log.d(TAG, "AirCapabilitiesExtensionContext.dispose");
 		
@@ -98,6 +104,10 @@ public class AirCapabilitiesExtensionContext extends FREContext {
 		functionMap.put("hasPackageInstalled", new HasPackageInstalledFunction());
 		functionMap.put("getTopInset", new GetTopInset());
 		functionMap.put("getBottomInset", new GetBottomInset());
+		functionMap.put("loadPackagedFile", new LoadPackagedFile());
+		functionMap.put("loadPackagedFileAsync", new LoadPackagedFileAsync());
+		functionMap.put("getLoadedFileData", new GetLoadedFileData());
+		functionMap.put("deleteLoadedFileData", new DeleteLoadedFileData());
 
 		return functionMap;	
 	}

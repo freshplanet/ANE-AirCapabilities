@@ -23,11 +23,15 @@
 @interface AirCapabilities : NSObject<MFMessageComposeViewControllerDelegate, SKStoreProductViewControllerDelegate> {
     FREContext _context;
     NSURL* _iTunesURL;
+    
+    @public NSMutableDictionary* loadedFiles;
 }
 #else
 @interface AirCapabilities : NSObject {
     FREContext _context;
     NSURL* _iTunesURL;
+    
+    @public NSMutableDictionary* loadedFiles;
 }
 #endif
 @end
